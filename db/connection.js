@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-export class connect{
+export class connect {
     user;
     port;
     #pass;
@@ -8,59 +8,80 @@ export class connect{
     #cluster;
     #dbName;
     static instance;
-    constructor({user:u, port :p, pass:w, host:h, cluster:c, dbName: d} ={
+    conexion;
+
+    constructor({ user: u, port: p, pass: w, host: h, cluster: c, dbName: d } = {
         user: process.env.MONGO_USER,
         port: process.env.MONGO_PORT,
         pass: process.env.MONGO_PWD,
         host: process.env.MONGO_HOST,
         cluster: process.env.MONGO_CLUSTER,
-        dbName: process.env.MONGO_DB}){
-            if(typeof connect.instance == "object"){
-                return connect.instance;
-            }
-            this.user = u,
-            this.port = p,
-            this.setPass = w;
-            this.setHost = h;
-            this.setCluster = c;
-            this.setdbName = d;
-            this.#open()
-            this.db = this.conexion.db(this.getdbName)
-            connect.instance = this; //this significa que todo lo que está en la clase se intancia en una variable especifica
-            return this;
+        dbName: process.env.MONGO_DB
+    }) {
+        if (typeof connect.instance == "object") {
+            return connect.instance;
         }
-    set setPass(pass){
-        this.pass = pass;
+        this.user = u;
+        this.port = p;
+        this.setPass = w;
+        this.setHost = h;
+        this.setCluster = c;
+        this.setdbName = d;
+        this.#open().then(() => {
+            this.db = this.conexion.db(this.getdbName);
+        });
+        connect.instance = this;
+        return this;
     }
-    set setHost(host){
-        this.host = host;
+
+    set setPass(pass) {
+        this.#pass = pass;
     }
-    set setCluster(cluster){
-        this.cluster = cluster;
+
+    set setHost(host) {
+        this.#host = host;
     }
-    set setdbName(dbName){
-        this.dbName = dbName;
+
+    set setCluster(cluster) {
+        this.#cluster = cluster;
     }
-    get getPass(){
-        return this.pass;
+
+    set setdbName(dbName) {
+        this.#dbName = dbName;
     }
-    get getHost(){
-        return this.host;
+
+    get getPass() {
+        return this.#pass;
     }
-    get getCluster(){
-        return this.cluster;
+
+    get getHost() {
+        return this.#host;
     }
-    get getdbName(){
-        return this.dbName;
+
+    get getCluster() {
+        return this.#cluster;
     }
-    async #open(){
-        this.conexion = new MongoClient(`${this.getHost}${this.user}:${this.getPass}@${this.getCluster}:${this.port}`)
+
+    get getdbName() {
+        return this.#dbName;
+    }
+
+    async #open() {
+        const uri = `${this.getHost}${this.user}:${this.getPass}@${this.getCluster}:${this.port}`;
+        this.conexion = new MongoClient(uri);
         await this.conexion.connect();
+        this.db = this.conexion.db(this.getdbName);
     }
-    async reconnect(){
+
+    async reconnect() {
         await this.#open();
     }
-    async close(){
-        await this.conexion.close();
+
+    async close() {
+        if (this.conexion) {
+            await this.conexion.close();
+        } else {
+            console.error('No connection to close');
+        }
     }
 }
