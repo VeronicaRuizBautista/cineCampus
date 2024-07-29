@@ -96,3 +96,184 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
   - `titulo` (string): El título de la película a buscar.
 - **Retorno:**
   - Objeto con los detalles de la película y sus horarios de proyección.
+
+
+2. **Roles Definidos:**
+
+   **Administrador:** Tiene permisos completos para gestionar el sistema, incluyendo la venta de boletos en el lugar físico. Los administradores no están involucrados en las compras en línea realizadas por los usuarios.
+
+   **Usuario Estándar:** Puede comprar boletos en línea sin la intervención del administrador.
+
+   **Usuario VIP:** Puede comprar boletos en línea con descuentos aplicables para titulares de tarjetas VIP.
+
+   - **API para Crear Usuario:**
+     - **Método `createClientAndUser(data)`**
+     - **Descripción:**
+       - Permite la creación de un nuevo cliente y usuario en la base de datos, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
+     - **Parámetros:**
+       - `data` (object): Un objeto que contiene los detalles del nuevo cliente y usuario.
+         - `_id` (string): Identificador único del cliente.
+         - `vip` (boolean): Indica si el cliente es VIP.
+         - `nombre` (string): Nombre del cliente.
+         - `nick` (string): Apodo del cliente, utilizado también como nombre de usuario.
+         - `email` (string): Correo electrónico del cliente.
+         - `cedula` (string): Cédula del cliente, utilizada también como contraseña del usuario.
+         - `telefono` (string): Número de teléfono del cliente.
+         - `rol` (string): Rol del usuario (puede ser 'usuarioEstándar', 'usuarioVIP', o 'administrador').
+     - **Retorno:**
+       ```json
+       {
+         "mensaje": "El usuario fue creado",
+         "datos": {
+           "acknowledged": true,
+           "insertedId": 21
+         },
+         "usuario": {
+           "ok": 1
+         }
+       }
+       ```
+     - **Ejemplo de Uso:**
+       ```javascript
+       const clienteInstance = new cliente();
+       const resultado = await clienteInstance.createClientAndUser({
+         _id: 21,
+         nombre: "Juan Pérez",
+         nick: "juanp",
+         email: "juanp@example.com",
+         cedula: "12345678",
+         telefono: "555-1234",
+         rol: "usuarioVIP"
+       });
+       console.log(JSON.stringify(resultado, null, 4));
+       ```
+
+   - **API para Obtener Detalles de Usuario:**
+     - **Método `getAllUser()`**
+     - **Descripción:**
+       - Obtiene una lista de todos los usuarios con detalles extendidos, incluyendo el rol basado en si el usuario es VIP.
+     - **Retorno:**
+       ```json
+       {
+         "mensaje": "Usuarios obtenidos",
+         "usuarios": [
+           {
+             "vip": true,
+             "genero": ["Acción", "Drama"],
+             "nombre": "Ana Gómez",
+             "nick": "anag",
+             "email": "anag@example.com",
+             "cedula": "87654321",
+             "telefono": "555-5678",
+             "estadoTarjeta": [
+               {
+                 "estado": "Activa"
+               }
+             ],
+             "rol": "usuarioVIP"
+           },
+           ...
+         ]
+       }
+       ```
+     - **Ejemplo de Uso:**
+       ```javascript
+       const clienteInstance = new cliente();
+       const usuarios = await clienteInstance.getAllUser();
+       console.log(JSON.stringify(usuarios, null, 4));
+       ```
+
+   - **API para Actualizar Rol de Usuario:**
+     - **Método `UpdateRolOfUser(user, data)`**
+     - **Descripción:**
+       - Permite la actualización del rol de un usuario (por ejemplo, cambiar de usuario estándar a VIP, o viceversa).
+     - **Parámetros:**
+       - `user` (string): El nombre del usuario cuyo rol se desea actualizar.
+       - `data` (Array<{ role: string, db: string }>): Un array de objetos que representan los nuevos roles que se desean asignar al usuario.
+     - **Retorno:**
+       ```json
+       {
+         "mensaje": "El rol del usuario fue actualizado",
+         "datos": {
+           "ok": 1
+         }
+       }
+       ```
+     - **Ejemplo de Uso:**
+       ```javascript
+       const clienteInstance = new cliente();
+       const resultado = await clienteInstance.UpdateRolOfUser('juanp', [
+         { role: 'usuarioEstandar', db: process.env.MONGO_DB }
+       ]);
+       console.log(JSON.stringify(resultado, null, 4));
+       ```
+
+   - **API para Listar Usuarios con Filtro:**
+     - **Método `getAllUserWithFilter(filter)`**
+     - **Descripción:**
+       - Permite la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol (VIP, estándar o administrador).
+     - **Parámetros:**
+       - `filter` (string): El rol por el cual filtrar los usuarios. Puede ser "usuarioVip", "usuarioEstandar", "administrador" u otro rol.
+     - **Retorno:**
+       ```json
+       {
+         "mensaje": "Usuarios obtenidos",
+         "usuarios": [
+           {
+             "vip": false,
+             "genero": ["Comedia"],
+             "nombre": "Luis Fernández",
+             "nick": "luisf",
+             "email": "luisf@example.com",
+             "cedula": "11223344",
+             "telefono": "555-9876",
+             "estadoTarjeta": [
+               {
+                 "estado": "Inactiva"
+               }
+             ],
+             "rol": "usuarioEstandar"
+           },
+           ...
+         ]
+       }
+       ```
+     - **Ejemplo de Uso:**
+       ```javascript
+       const clienteInstance = new cliente();
+       const resultados = await clienteInstance.getAllUserWithFilter('usuarioVip');
+       console.log(JSON.stringify(resultados, null, 4));
+       ```
+
+### **Descripción de los Métodos**
+
+#### `createClientAndUser(data)`
+- **Descripción:**
+  - Crea un nuevo cliente y usuario en la base de datos, asignando roles y privilegios específicos.
+- **Parámetros:**
+  - `data` (object): Datos del cliente y usuario a crear.
+- **Retorno:**
+  - Objeto con el mensaje y detalles de la operación.
+
+#### `getAllUser()`
+- **Descripción:**
+  - Obtiene una lista de todos los usuarios con detalles extendidos, incluyendo el rol basado en si el usuario es VIP.
+- **Retorno:**
+  - Array de objetos de usuarios con detalles extendidos.
+
+#### `UpdateRolOfUser(user, data)`
+- **Descripción:**
+  - Actualiza los roles de un usuario en la base de datos MongoDB.
+- **Parámetros:**
+  - `user` (string): El nombre del usuario cuyo rol se desea actualizar.
+  - `data` (Array<{ role: string, db: string }>): Nuevos roles a asignar.
+- **Retorno:**
+  - Objeto con el mensaje de éxito o error y los datos del resultado.
+
+#### `getAllUserWithFilter(filter)`
+- **Descripción:**
+  - Obtiene los detalles de todos los usuarios filtrados por rol.
+- **Parámetros:**
+  - `filter` (string): El rol por el cual filtrar los usuarios.
+- **Retorno:**
+  - Objeto con el mensaje de éxito y los detalles de los usuarios filtrados.
