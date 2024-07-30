@@ -138,6 +138,100 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
 ---
 
+3. **Asignación de Asientos:**
+
+- **API para Reservar Asientos:**
+  - **Método `seatReservation(data)`**
+  - **Descripción:**
+    - Reserva un asiento para una función específica para un cliente.
+  - **Parámetros:**
+    - `data` (Object): Los datos necesarios para realizar la reserva.
+      - `data._id` (string): ID del movimiento y boleta (debe ser único para cada reserva).
+      - `data.nombreAsiento` (string): Nombre del asiento que se desea reservar.
+      - `data.fechaActual` (Date): La fecha y hora actual de la reserva.
+      - `data.tipo` (string): Tipo de la reserva (por ejemplo, "reserva").
+  - **Retorno:**
+    ```json
+    {
+      "mensaje": "Se hizo la reserva para la función correctamente",
+      "reserva": {
+        "_id": "12345",
+        "idMovimiento": "12345",
+        "idAsiento": "67890",
+        "fecha": "2024-07-30T14:00:00.000Z"
+      }
+    }
+    ```
+  - **Ejemplo de Uso:**
+    ```javascript
+    const reservaInstance = new Reserva();
+    const resultado = await reservaInstance.seatReservation({
+      _id: "12345",
+      nombreAsiento: "A1",
+      fechaActual: new Date(),
+      tipo: "reserva",
+      idFuncion: "67890"
+    });
+    console.log(JSON.stringify(resultado, null, 4));
+    ```
+
+- **API para Cancelar Reserva de Asientos:**
+  - **Método `cancelSeatReservation(nombreAsiento)`**
+  - **Descripción:**
+    - Cancela una reserva de asiento para un cliente específico.
+  - **Parámetros:**
+    - `nombreAsiento` (Object): Información sobre el asiento que se desea cancelar.
+      - `nombreAsiento.nombreAsiento` (string): Nombre del asiento que se desea cancelar.
+      - `nombreAsiento.fechaAdquisicion` (Date): Fecha de adquisición de la reserva que se desea cancelar.
+  - **Retorno:**
+    ```json
+    {
+      "mensaje": "Se ha cancelado correctamente la reserva del asiento",
+      "deleteboleta": {
+        "deletedCount": 1
+      },
+      "deleteMovimiento": {
+        "deletedCount": 1
+      }
+    }
+    ```
+  - **Ejemplo de Uso:**
+    ```javascript
+    const reservaInstance = new Reserva();
+    const resultado = await reservaInstance.cancelSeatReservation({
+      nombreAsiento: "A1",
+      fechaAdquisicion: "2024-07-30T14:00:00.000Z"
+    });
+    console.log(JSON.stringify(resultado, null, 4));
+    ```
+
+### **Descripción de los Métodos**
+
+#### `seatReservation(data)`
+- **Descripción:**
+  - Reserva un asiento para una función específica para un cliente. Primero valida la existencia del cliente y del movimiento. Luego verifica la existencia de la función y la disponibilidad del asiento. Si todas las validaciones son exitosas, realiza la reserva y guarda la información en la base de datos.
+- **Parámetros:**
+  - `data` (Object): Los datos necesarios para realizar la reserva.
+    - `data._id` (string): ID del movimiento y boleta (debe ser único para cada reserva).
+    - `data.nombreAsiento` (string): Nombre del asiento que se desea reservar.
+    - `data.fechaActual` (Date): La fecha y hora actual de la reserva.
+    - `data.tipo` (string): Tipo de la reserva (por ejemplo, "reserva").
+- **Retorno:**
+  - Objeto con el resultado de la operación de reserva, incluyendo un mensaje de éxito y detalles de la reserva.
+
+#### `cancelSeatReservation(nombreAsiento)`
+- **Descripción:**
+  - Cancela una reserva de asiento para un cliente específico. Primero valida la existencia del cliente y del asiento. Luego busca todas las reservas asociadas al cliente. Si se encuentra una boleta que coincida con el asiento y la fecha de adquisición, se eliminan la boleta y el movimiento correspondiente de la base de datos.
+- **Parámetros:**
+  - `nombreAsiento` (Object): Información sobre el asiento que se desea cancelar.
+    - `nombreAsiento.nombreAsiento` (string): Nombre del asiento que se desea cancelar.
+    - `nombreAsiento.fechaAdquisicion` (Date): Fecha de adquisición de la reserva que se desea cancelar.
+- **Retorno:**
+  - Objeto con el resultado de la operación de cancelación, incluyendo un mensaje de éxito y los resultados de la eliminación de la boleta y el movimiento.
+
+---
+
+
 5. **Roles Definidos:**
 
    **Administrador:** Tiene permisos completos para gestionar el sistema, incluyendo la venta de boletos en el lugar físico. Los administradores no están involucrados en las compras en línea realizadas por los usuarios.
