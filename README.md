@@ -97,8 +97,48 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 - **Retorno:**
   - Objeto con los detalles de la película y sus horarios de proyección.
 
+2. **Compra de Boletos:**
 
-2. **Roles Definidos:**
+- **API para Verificar Disponibilidad de Asientos:**
+  - **Método `verifySeatAvailability(idFuncion)`**
+  - **Descripción:**
+    - Verifica la disponibilidad de asientos en una función específica de una sala.
+  - **Parámetros:**
+    - `idFuncion` (string): Identificador de la función.
+  - **Retorno:**
+    ```json
+    {
+      "mensaje": "Disponibilidad de asientos",
+      "asientosDisponibles": [
+        {
+            "_id": 17,
+            "idSala": 6,
+            "asiento": "F2",
+            "tipo": "estandar"
+        }, ...
+      ]
+    }
+    ```
+  - **Ejemplo de Uso:**
+    ```javascript
+    const funcionInstance = new Funcion();
+    const disponibilidad = await funcionInstance.verifySeatAvailability({idFuncion:7});
+    console.log(JSON.stringify(disponibilidad, null, 4));
+    ```
+
+### **Descripción de los Métodos**
+
+#### `verifySeatAvailability(idFuncion, idSala, fechaInicio)`
+- **Descripción:**
+  - Verifica la disponibilidad de asientos en una función específica.
+- **Parámetros:**
+  - `idFuncion` (string): Identificador de la función.
+- **Retorno:**
+  - Array de asientos disponibles para la función específica.
+
+---
+
+5. **Roles Definidos:**
 
    **Administrador:** Tiene permisos completos para gestionar el sistema, incluyendo la venta de boletos en el lugar físico. Los administradores no están involucrados en las compras en línea realizadas por los usuarios.
 
