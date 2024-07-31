@@ -1,5 +1,4 @@
 # CineCampus
-
 ### **Problematica**
 
 CineCampus es una empresa de entretenimiento que se especializa en ofrecer una experiencia de cine completa y personalizada. La empresa desea desarrollar una aplicación web que permita a los usuarios seleccionar películas, comprar boletos y asignar asientos de manera eficiente y cómoda. La aplicación también ofrecerá opciones de descuento para usuarios con tarjeta VIP y permitirá realizar compras en línea.
@@ -7,6 +6,15 @@ CineCampus es una empresa de entretenimiento que se especializa en ofrecer una e
 ### **Objetivo**
 
 Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando MongoDB como base de datos. Las APIs deberán gestionar la selección de películas, la compra de boletos, la asignación de asientos, y la implementación de descuentos para tarjetas VIP, con soporte para diferentes roles de usuario.
+
+**Cadena de Coneccion**
+
+MONGO_USER = mongo
+MONGO_PORT = 41308
+MONGO_PWD = sdTrHIbgrwSeayOgnvCkbhfglQkTBZKc
+MONGO_HOST = mongodb://
+MONGO_CLUSTER = monorail.proxy.rlwy.net
+MONGO_DB = cinecampus
 
 ### **Requisitos Funcionales**
 
@@ -38,9 +46,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-       const peliculaInstance = new Pelicula();
-       const peliculas = await peliculaInstance.getAllPelicula();
-       console.log(JSON.stringify(peliculas, null, 4));
+      let Pelicula = new pelicula()
+      console.log(JSON.stringify(await Pelicula.getAllpelicula(new Date('2024-06-20T14:00:00.000+00:00')), null, 4) );
        ```
 
    - **API para Obtener Detalles de Película:**
@@ -76,9 +83,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-       const peliculaInstance = new Pelicula();
-       const pelicula = await peliculaInstance.getOnePelicula();
-       console.log(JSON.stringify(pelicula, null, 4));
+        let Pelicula = new pelicula()
+        console.log(JSON.stringify(await Pelicula.getOnepelicula({titulo:'Dune: Part Two' }), null, 4) );
        ```
 
 ### **Descripción de los Métodos**
@@ -100,7 +106,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 2. **Compra de Boletos:**
 
 - **API para Verificar Disponibilidad de Asientos:**
-  - **Método `verifySeatAvailability(idFuncion)`**
+  - **Método `getSeatAvailability(idFuncion)`**
   - **Descripción:**
     - Verifica la disponibilidad de asientos en una función específica de una sala.
   - **Parámetros:**
@@ -121,9 +127,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     ```
   - **Ejemplo de Uso:**
     ```javascript
-    const funcionInstance = new Funcion();
-    const disponibilidad = await funcionInstance.verifySeatAvailability({idFuncion:7});
-    console.log(JSON.stringify(disponibilidad, null, 4));
+    let asientos = new asiento()
+    console.log(JSON.stringify(await asientos.getSeatAvailability({idFuncion:7}), null, 4))
     ```
 
 ### **Descripción de los Métodos**
@@ -164,15 +169,14 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     ```
   - **Ejemplo de Uso:**
     ```javascript
-    const reservaInstance = new Reserva();
-    const resultado = await reservaInstance.seatReservation({
-      _id: "12345",
-      nombreAsiento: "A1",
-      fechaActual: new Date(),
-      tipo: "reserva",
-      idFuncion: "67890"
-    });
-    console.log(JSON.stringify(resultado, null, 4));
+    let asientos = new asiento()
+    console.log(JSON.stringify(await asientos.seatReservation({
+        "_id": 21,
+        "tipo": "reserva",
+        "idFuncion": 10,
+        "nombreAsiento": "E3",
+        "fechaActual" : new Date("2024-05-01T10:15:00Z")
+    }), null, 4));
     ```
 
 - **API para Cancelar Reserva de Asientos:**
@@ -197,12 +201,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     ```
   - **Ejemplo de Uso:**
     ```javascript
-    const reservaInstance = new Reserva();
-    const resultado = await reservaInstance.cancelSeatReservation({
-      nombreAsiento: "A1",
-      fechaAdquisicion: "2024-07-30T14:00:00.000Z"
-    });
-    console.log(JSON.stringify(resultado, null, 4));
+    let asientos = new asiento()
+    console.log(JSON.stringify(await asientos.cancelSeatReservation({nombreAsiento: "A2", fechaAdquisicion:"2024-07-01T10:15:00.000Z" }), null, 4))
     ```
 
 ### **Descripción de los Métodos**
@@ -228,6 +228,40 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     - `nombreAsiento.fechaAdquisicion` (Date): Fecha de adquisición de la reserva que se desea cancelar.
 - **Retorno:**
   - Objeto con el resultado de la operación de cancelación, incluyendo un mensaje de éxito y los resultados de la eliminación de la boleta y el movimiento.
+
+---
+
+4. **Descuentos y Tarjetas VIP:**
+
+- **API para Validar Tarjeta VIP:**
+  - **Método `validateCard(cardNumber)`**
+  - **Descripción:**
+    - Valida una tarjeta VIP que pertenezca al usuario logueado.
+  - **Retorno:**
+    ```json
+    {
+      "mensaje": "Su tarjeta esta registrada pero no activa",
+      "tarjeta": {
+          "_id": 1,
+          "idCliente": 1,
+          "fechaExpedicion": "2024-01-15T00:00:00.000Z",
+          "estado": "activa"
+      }
+    }
+    ```
+  - **Ejemplo de Uso:**
+    ```javascript
+    let tarjetas = new tarjeta()
+    console.log(JSON.stringify(await tarjetas.validateCard(), null, 4))
+    ```
+
+### **Descripción del Método**
+
+#### `validateCard(cardNumber)`
+- **Descripción:**
+  -Verifica si la tarjeta existe en la base de datos y si es válida. Retorna un mensaje de éxito o error.
+- **Retorno:**
+  - Objeto con el resultado de la validación, incluyendo un mensaje de éxito.
 
 ---
 
@@ -269,17 +303,16 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-       const clienteInstance = new cliente();
-       const resultado = await clienteInstance.createClientAndUser({
-         _id: 21,
-         nombre: "Juan Pérez",
-         nick: "juanp",
-         email: "juanp@example.com",
-         cedula: "12345678",
-         telefono: "555-1234",
-         rol: "usuarioVIP"
-       });
-       console.log(JSON.stringify(resultado, null, 4));
+        let Cliente = new cliente()
+        console.log(JSON.stringify(await Cliente.createClientAndUser({
+            "_id": 21,
+            "nombre": "Laura Gómez",
+            "nick": "lau",
+            "email": "laura.gomez@example.com",
+            "cedula": 12945678,
+            "telefono": 3001237667,
+            "rol": "usuarioVip"
+        })));
        ```
 
    - **API para Obtener Detalles de Usuario:**
@@ -312,9 +345,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-       const clienteInstance = new cliente();
-       const usuarios = await clienteInstance.getAllUser();
-       console.log(JSON.stringify(usuarios, null, 4));
+       let Cliente = new cliente()
+      console.log(JSON.stringify(await Cliente.getAllUser(), null, 4))
        ```
 
    - **API para Actualizar Rol de Usuario:**
@@ -335,11 +367,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-       const clienteInstance = new cliente();
-       const resultado = await clienteInstance.UpdateRolOfUser('juanp', [
-         { role: 'usuarioEstandar', db: process.env.MONGO_DB }
-       ]);
-       console.log(JSON.stringify(resultado, null, 4));
+        let Cliente = new cliente()
+        console.log(JSON.stringify(await Cliente.UpdateRolOfUser("lau", [{role: "usuarioVip", db: process.env.MONGO_DB }])));
        ```
 
    - **API para Listar Usuarios con Filtro:**
@@ -374,9 +403,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-       const clienteInstance = new cliente();
-       const resultados = await clienteInstance.getAllUserWithFilter('usuarioVip');
-       console.log(JSON.stringify(resultados, null, 4));
+        let Cliente = new cliente()
+        console.log(JSON.stringify(await Cliente.getAllUserWithFilter('usuarioVip'), null, 4))
        ```
 
 ### **Descripción de los Métodos**
@@ -411,3 +439,5 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
   - `filter` (string): El rol por el cual filtrar los usuarios.
 - **Retorno:**
   - Objeto con el mensaje de éxito y los detalles de los usuarios filtrados.
+
+---
