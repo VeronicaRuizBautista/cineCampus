@@ -8,13 +8,14 @@ CineCampus es una empresa de entretenimiento que se especializa en ofrecer una e
 Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando MongoDB como base de datos. Las APIs deberán gestionar la selección de películas, la compra de boletos, la asignación de asientos, y la implementación de descuentos para tarjetas VIP, con soporte para diferentes roles de usuario.
 
 **Cadena de Coneccion**
-
-MONGO_USER = mongo
-MONGO_PORT = 41308
-MONGO_PWD = sdTrHIbgrwSeayOgnvCkbhfglQkTBZKc
-MONGO_HOST = mongodb://
-MONGO_CLUSTER = monorail.proxy.rlwy.net
-MONGO_DB = cinecampus
+```json
+    MONGO_USER="anaT"
+    MONGO_PORT=41308
+    MONGO_PWD="12345678"
+    MONGO_HOST="mongodb://"
+    MONGO_CLUSTER="monorail.proxy.rlwy.net"
+    MONGO_DB="cinecampus"
+```
 
 ### **Requisitos Funcionales**
 

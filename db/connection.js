@@ -67,7 +67,7 @@ export class connect {
     }
 
     async #open() {
-        const uri = `${this.getHost}${this.user}:${this.getPass}@${this.getCluster}:${this.port}`;
+        const uri = `${this.getHost}${this.user}:${this.getPass}@${this.getCluster}:${this.port}/${this.getdbName}`;
         this.conexion = new MongoClient(uri);
         await this.conexion.connect();
         this.db = this.conexion.db(this.getdbName);
