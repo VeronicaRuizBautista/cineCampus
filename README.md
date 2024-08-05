@@ -10,10 +10,10 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 **Cadena de Coneccion**
 ```json
     MONGO_USER="anaT"
-    MONGO_PORT=41308
+    MONGO_PORT=27017
     MONGO_PWD="12345678"
     MONGO_HOST="mongodb://"
-    MONGO_CLUSTER="monorail.proxy.rlwy.net"
+    MONGO_CLUSTER="172.16.102.13"
     MONGO_DB="cinecampus"
 ```
 
