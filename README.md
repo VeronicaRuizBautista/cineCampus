@@ -47,8 +47,15 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-      let Pelicula = new pelicula()
-      console.log(JSON.stringify(await Pelicula.getAllpelicula(new Date('2024-06-20T14:00:00.000+00:00')), null, 4) );
+            (async () => {
+          try {
+              const instance = pelicula.getInstance;
+              const result = await instance.getAllpelicula(new Date('2024-06-20T14:00:00.000+00:00'));
+              console.log(JSON.stringify(result, null, 4));
+          } catch (error) {
+              console.error("Error en la ejecución principal:", error);
+          }
+      })();
        ```
 
    - **API para Obtener Detalles de Película:**
@@ -84,8 +91,15 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-        let Pelicula = new pelicula()
-        console.log(JSON.stringify(await Pelicula.getOnepelicula({titulo:'Dune: Part Two' }), null, 4) );
+          (async () => {
+          try {
+              const instance = pelicula.getInstance;
+              const result = await instance.getOnepelicula({titulo:'Dune: Part Two' });
+              console.log(JSON.stringify(result, null, 4));
+          } catch (error) {
+              console.error("Error en la ejecución principal:", error);
+          }
+      })();
        ```
 
 ### **Descripción de los Métodos**
@@ -128,8 +142,15 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     ```
   - **Ejemplo de Uso:**
     ```javascript
-    let asientos = new asiento()
-    console.log(JSON.stringify(await asientos.getSeatAvailability({idFuncion:7}), null, 4))
+    (async () => {
+        try {
+            const instance = Asiento.getInstance;
+            const result = await instance.getSeatAvailability({ idFuncion: 7 });
+            console.log(JSON.stringify(result, null, 4));
+        } catch (error) {
+            console.error("Error en la ejecución principal:", error);
+        }
+    })();
     ```
 
 ### **Descripción de los Métodos**
@@ -170,14 +191,22 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     ```
   - **Ejemplo de Uso:**
     ```javascript
-    let asientos = new asiento()
-    console.log(JSON.stringify(await asientos.seatReservation({
-        "_id": 21,
-        "tipo": "reserva",
-        "idFuncion": 10,
-        "nombreAsiento": "E3",
-        "fechaActual" : new Date("2024-05-01T10:15:00Z")
-    }), null, 4));
+      (async () => {
+          try {
+              const instance = Asiento.getInstance;
+              const result = await instance.seatReservation({
+                  "_id": 24,
+                  "tipo": "reserva",
+                  "idFuncion": 10,
+                  "nombreAsiento": "E3",
+                  "fechaActual" : new Date("2024-05-01T10:15:00Z")
+              });
+              console.log(JSON.stringify(result, null, 4));
+          } catch (error) {
+              console.error("Error en la ejecución principal:", error);
+          }
+      })();
+
     ```
 
 - **API para Cancelar Reserva de Asientos:**
@@ -202,8 +231,15 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     ```
   - **Ejemplo de Uso:**
     ```javascript
-    let asientos = new asiento()
-    console.log(JSON.stringify(await asientos.cancelSeatReservation({nombreAsiento: "A2", fechaAdquisicion:"2024-07-01T10:15:00.000Z" }), null, 4))
+    (async () => {
+        try {
+            const instance = pelicula.getInstance;
+            const result = await instance.cancelSeatReservation({nombreAsiento: "A2", fechaAdquisicion:"2024-07-01T10:15:00.000Z" });
+            console.log(JSON.stringify(result, null, 4));
+        } catch (error) {
+            console.error("Error en la ejecución principal:", error);
+        }
+    })();
     ```
 
 ### **Descripción de los Métodos**
@@ -252,8 +288,15 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     ```
   - **Ejemplo de Uso:**
     ```javascript
-    let tarjetas = new tarjeta()
-    console.log(JSON.stringify(await tarjetas.validateCard(), null, 4))
+    (async () => {
+        try {
+            const instance = tarjeta.getInstance;
+            const result = await instance.validateCard();
+            console.log(JSON.stringify(result, null, 4));
+        } catch (error) {
+            console.error("Error en la ejecución principal:", error);
+        }
+    })();
     ```
 
 ### **Descripción del Método**

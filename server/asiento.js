@@ -1,14 +1,15 @@
-import {connect} from "../../db/connection.js"
+const connect = require("../db/connection");
 
-export class asiento extends connect{
+class Asiento extends connect {
     static instance;
-    constructor(){
-        if(typeof asiento.instance === "object"){
-            return asiento.instance;
+
+    static get getInstance() {
+        if (typeof Asiento.instance === "object") {
+            return Asiento.instance;
         }
-        super();
-        asiento.instance = this;
         
+        Asiento.instance = new Asiento();
+        return Asiento.instance;
     }
 
     /**
@@ -23,17 +24,18 @@ export class asiento extends connect{
      * 
      * @throws {Error} Error al obtener los asientos.
      */
-    async getSeatAvailability(idFuncion){
-        try{
-            let data = idFuncion.idFuncion
-            await this.reconnect()
+    async getSeatAvailability(idFuncion) {
+        try {
+            let data = idFuncion.idFuncion;
+            await this.reconnect();
             let collectionFuncion = this.db.collection("funcion");
-            let funcion = await collectionFuncion.findOne({_id: data})
-            if (funcion == null){
-                return {mensaje : "el id de la funcion ingresado no existe"}
-            }else{
-                let sala = await funcion.idSala
-                let boleta = await this.db.collection("boleta");
+            let funcion = await collectionFuncion.findOne({ _id: data });
+
+            if (funcion == null) {
+                return { mensaje: "El ID de la función ingresado no existe" };
+            } else {
+                let sala = funcion.idSala;
+                let boleta = this.db.collection("boleta");
                 let ocupados = await boleta.aggregate([
                     {
                         $lookup: {
@@ -43,25 +45,28 @@ export class asiento extends connect{
                             as: "movimiento"
                         }
                     },
-                    {$unwind: "$movimiento"},
-                    {$match: {"movimiento.idFuncion": data}},
+                    { $unwind: "$movimiento" },
+                    { $match: { "movimiento.idFuncion": data } },
                     {
-                        $project:{
-                            _id:0,
-                            idAsiento:1
+                        $project: {
+                            _id: 0,
+                            idAsiento: 1
                         }
                     }
                 ]).toArray();
-                let asientosOcupados = ocupados.map(doc => doc.idAsiento)
-                let asientodb = await this.db.collection("asiento")
-                let totalAsientos = await asientodb.find({idSala: sala}).toArray();
+
+                let asientosOcupados = ocupados.map(doc => doc.idAsiento);
+                let asientodb = this.db.collection("asiento");
+                let totalAsientos = await asientodb.find({ idSala: sala }).toArray();
                 let asientosDisponibles = totalAsientos.filter(asiento => !asientosOcupados.includes(asiento._id));
-                return { mensaje: `Asientos disponibles para la funcion ${data}`, asientos: asientosDisponibles };
+                return { mensaje: `Asientos disponibles para la función ${data}`, asientos: asientosDisponibles };
             }
-        }catch(error){
-            console.error("Error al obtener los asientos:", error)
+        } catch (error) {
+            console.error("Error al obtener los asientos:", error);
+            throw error; // Asegúrate de lanzar el error para que el llamador pueda manejarlo
         }
     }
+
 
 
 /**
@@ -224,3 +229,5 @@ export class asiento extends connect{
         }
     }
 }
+
+module.exports = Asiento;

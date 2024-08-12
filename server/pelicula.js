@@ -1,15 +1,14 @@
-import {connect} from "../../db/connection.js"
-
-export class pelicula extends connect{
+const connect = require("../db/connection");
+class pelicula extends connect{
     static instance;
-    constructor(){
-        if(typeof pelicula.instance === "object"){
-            return pelicula.instance;
-        }
-        super();
-        pelicula.instance = this;
-        
-    }
+    static get getInstance() {
+      if (typeof pelicula.instance === "object") {
+          return pelicula.instance;
+      }
+      
+      pelicula.instance = new pelicula();
+      return pelicula.instance;
+  }
  
 
 /**
@@ -141,3 +140,4 @@ export class pelicula extends connect{
         }
     }
 }
+module.exports = pelicula;

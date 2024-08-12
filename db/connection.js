@@ -1,6 +1,6 @@
-import { MongoClient } from "mongodb";
+const { MongoClient } = require("mongodb");
 
-export class connect {
+module.exports = class connect {
     user;
     port;
     #pass;
@@ -24,7 +24,7 @@ export class connect {
         this.user = u;
         this.port = p;
         this.setPass = w;
-        this.setHost = h;
+        this.setHost = h; // Aquí `mongodb://` se quitará del URI
         this.setCluster = c;
         this.setdbName = d;
         this.#open().then(() => {
@@ -67,8 +67,9 @@ export class connect {
     }
 
     async #open() {
-        const uri = `${this.getHost}${this.user}:${this.getPass}@${this.getCluster}:${this.port}/${this.getdbName}`;
-        this.conexion = new MongoClient(uri);
+        // Construir el URI correctamente con usuario y contraseña
+        const uri = `mongodb://${this.user}:${this.getPass}@${this.getCluster}:${this.port}/${this.getdbName}`;
+        this.conexion = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
         await this.conexion.connect();
         this.db = this.conexion.db(this.getdbName);
     }

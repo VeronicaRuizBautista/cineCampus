@@ -1,14 +1,14 @@
-import {connect} from "../../db/connection.js"
+const connect = require("../db/connection");
 
-export class tarjeta extends connect{
+class tarjeta extends connect{
     static instance;
-    constructor(){
-        if(typeof tarjeta.instance === "object"){
+    static get getInstance() {
+        if (typeof tarjeta.instance === "object") {
             return tarjeta.instance;
         }
-        super();
-        tarjeta.instance = this;
         
+        tarjeta.instance = new tarjeta();
+        return tarjeta.instance;
     }
  
 /**
@@ -52,3 +52,5 @@ export class tarjeta extends connect{
         }
     }
 }
+
+module.exports = tarjeta;
