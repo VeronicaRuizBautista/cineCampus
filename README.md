@@ -15,6 +15,10 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     MONGO_HOST="mongodb://"
     MONGO_CLUSTER="172.16.102.13"
     MONGO_DB="cinecampus"
+
+    EXPRESS_STATIC="public"
+    EXPRESS_PORT=5012
+    EXPRESS_HOST="localhost"
 ```
 
 ### **Requisitos Funcionales**
@@ -47,9 +51,9 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-            (async () => {
+      (async () => {
           try {
-              const instance = pelicula.getInstance;
+              const instance = Pelicula.getInstance;
               const result = await instance.getAllpelicula(new Date('2024-06-20T14:00:00.000+00:00'));
               console.log(JSON.stringify(result, null, 4));
           } catch (error) {
@@ -91,15 +95,15 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-          (async () => {
-          try {
-              const instance = pelicula.getInstance;
-              const result = await instance.getOnepelicula({titulo:'Dune: Part Two' });
-              console.log(JSON.stringify(result, null, 4));
-          } catch (error) {
-              console.error("Error en la ejecución principal:", error);
-          }
-      })();
+        (async () => {
+            try {
+                const instance = Pelicula.getInstance;
+                const result = await instance.getOnepelicula({titulo:'Dune: Part Two' });
+                console.log(JSON.stringify(result, null, 4));
+            } catch (error) {
+                console.error("Error en la ejecución principal:", error);
+            }
+        })();
        ```
 
 ### **Descripción de los Métodos**
@@ -347,16 +351,23 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```
      - **Ejemplo de Uso:**
        ```javascript
-        let Cliente = new cliente()
-        console.log(JSON.stringify(await Cliente.createClientAndUser({
-            "_id": 21,
-            "nombre": "Laura Gómez",
-            "nick": "lau",
-            "email": "laura.gomez@example.com",
-            "cedula": 12945678,
-            "telefono": 3001237667,
-            "rol": "usuarioVip"
-        })));
+        (async () => {
+            try {
+                const instance = user.getInstance;
+                const result = await instance.createClientAndUser({
+                    "_id": 21,
+                    "nombre": "Laura Gómez",
+                    "nick": "lau",
+                    "email": "laura.gomez@example.com",
+                    "cedula": 12945678,
+                    "telefono": 3001237667,
+                    "rol": "usuarioVip"
+                });
+                console.log(JSON.stringify(result, null, 4));
+            } catch (error) {
+                console.error("Error en la ejecución principal:", error);
+            }
+        })();
        ```
 
    - **API para Obtener Detalles de Usuario:**

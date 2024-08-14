@@ -1,5 +1,4 @@
-const connect = require("../db/connection");
-
+const connect = require('../helper/connection.js')
 class tarjeta extends connect{
     static instance;
     static get getInstance() {

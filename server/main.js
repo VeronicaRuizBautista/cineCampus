@@ -1,3 +1,6 @@
-const pelicula = require("./pelicula");
-const Asiento = require("./asiento");
-const tarjeta = require("./tarjeta");
+const Pelicula = require("./model/peliculaModel");
+const Asiento = require("./model/asientoModel");
+const Tarjeta = require("./model/tarjetaModel");
+const User = require("./model/userModel");
+
+

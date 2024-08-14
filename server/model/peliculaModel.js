@@ -1,13 +1,14 @@
-const connect = require("../db/connection");
-class pelicula extends connect{
+const connect = require('../helper/connection.js')
+
+class Pelicula extends connect{
     static instance;
     static get getInstance() {
-      if (typeof pelicula.instance === "object") {
-          return pelicula.instance;
+      if (typeof Pelicula.instance === "object") {
+          return Pelicula.instance;
       }
       
-      pelicula.instance = new pelicula();
-      return pelicula.instance;
+      Pelicula.instance = new Pelicula();
+      return Pelicula.instance;
   }
  
 
@@ -140,4 +141,4 @@ class pelicula extends connect{
         }
     }
 }
-module.exports = pelicula;
+module.exports = Pelicula;

@@ -1,33 +1,34 @@
-import {connect} from "../../db/connection.js"
+const connect = require('../helper/connection.js')
 
-export class cliente extends connect{
+class user extends connect{
     static instance;
-    constructor(){
-        if(typeof cliente.instance === "object"){
-            return cliente.instance;
-        }
-        super();
-        cliente.instance = this;
-    }
+    static get getInstance() {
+      if (typeof user.instance === "object") {
+          return user.instance;
+      }
+      
+      user.instance = new user();
+      return user.instance;
+  }
 
 
 /**
  *  @function createClientAndUser()
- * Crea un nuevo cliente y usuario en la base de datos.
+ * Crea un nuevo user y usuario en la base de datos.
  *
- * @param {Object} data - Datos del cliente y usuario a crear.
- * @param {string} data._id - Identificador único del cliente (si es necesario, aunque no se usa en el código proporcionado).
- * @param {boolean} data.vip - Indica si el cliente es VIP.
- * @param {string} data.nombre - Nombre del cliente.
- * @param {string} data.nick - Apodo del cliente (también se usa para el nombre de usuario).
- * @param {string} data.email - Correo electrónico del cliente.
- * @param {string} data.cedula - Cédula del cliente (también se usa como contraseña del usuario).
- * @param {string} data.telefono - Número de teléfono del cliente.
+ * @param {Object} data - Datos del user y usuario a crear.
+ * @param {string} data._id - Identificador único del user (si es necesario, aunque no se usa en el código proporcionado).
+ * @param {boolean} data.vip - Indica si el user es VIP.
+ * @param {string} data.nombre - Nombre del user.
+ * @param {string} data.nick - Apodo del user (también se usa para el nombre de usuario).
+ * @param {string} data.email - Correo electrónico del user.
+ * @param {string} data.cedula - Cédula del user (también se usa como contraseña del usuario).
+ * @param {string} data.telefono - Número de teléfono del user.
  * @param {string} data.rol - Rol del usuario en la base de datos.
  * 
  * @returns {Promise<Object>} Un objeto con el mensaje y los detalles de la operación. 
  * @returns {string} return.mensaje - Mensaje que indica el resultado de la operación.
- * @returns {Object} return.datos - Detalles de la inserción en la colección "cliente".
+ * @returns {Object} return.datos - Detalles de la inserción en la colección "user".
  * @returns {Object} return.usuario - Detalles del usuario creado en la base de datos.
  * si se crea con exito debe mostrar:
  * {"mensaje":"El usuario fue creado","datos":{"acknowledged":true,"insertedId":21},"usuario":{"ok":1}}
@@ -226,3 +227,5 @@ export class cliente extends connect{
         }
     }
 }
+
+module.exports = user;

@@ -2,14 +2,16 @@
   "name": "cinecampus",
   "version": "1.0.0",
   "description": "### **Problematica**",
-  "main": "index.js",
+  "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "node --watch --env-file=.env server/main.js"
+    "env": "node --watch --env-file .env server/main.js",
+    "dev": "node --watch --env-file .env app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.19.2",
     "mongodb": "^6.8.0"
   }
 }

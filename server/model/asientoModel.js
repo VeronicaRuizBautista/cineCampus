@@ -1,5 +1,4 @@
-const connect = require("../db/connection");
-
+const connect = require('../helper/connection.js')
 class Asiento extends connect {
     static instance;
 
