@@ -10,7 +10,7 @@ app.use('/js', express.static(path.join(__dirname, process.env.EXPRESS_STATIC, '
 app.use('/storage', express.static(path.join(__dirname, process.env.EXPRESS_STATIC, 'storage')));
 
 
-//app.use(router);
+app.use(router);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, process.env.EXPRESS_STATIC, 'index.html'));
