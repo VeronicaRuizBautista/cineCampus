@@ -6,7 +6,7 @@ const path = require('path');
 const { createUser } = require('./controllers/userController');
 const { userValidationRules } = require('./validators/userValidator');
 
-router.get('/users', userValidationRules(), createUser);
+router.post('/users', userValidationRules(), createUser);
 
 
 
