@@ -1,15 +1,19 @@
 class getAllPeliculaDTO {
-    constructor({fechayhora}) {
+    constructor({ fechayhora }) {
         this.fechayhora = fechayhora;
     }
 }
 
-module.exports = getAllPeliculaDTO;
-
-
-class PeliculaDTO {
-    constructor({titulo}) {
-        this.t = titulo;
+class getOnePeliculaDTO {
+    constructor({ titulo }) {
+        this.titulo = titulo;
     }
 }
+
+module.exports = {
+    getAllPeliculaDTO,
+    getOnePeliculaDTO
+};
+
+
 

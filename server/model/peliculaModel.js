@@ -104,7 +104,7 @@ class Pelicula extends connect{
             let res = await this.collection.aggregate([
                 {
                     $match: {
-                      titulo: titulo.titulo // Filtrar por título específico
+                      titulo: titulo // Filtrar por título específico
                     }
                 },
                 {

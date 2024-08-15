@@ -101,12 +101,14 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
         (async () => {
             try {
                 const instance = Pelicula.getInstance;
-                const result = await instance.getOnepelicula({titulo:'Dune: Part Two' });
+                const result = await instance.getOnepelicula('Dune: Part Two' );
                 console.log(JSON.stringify(result, null, 4));
             } catch (error) {
                 console.error("Error en la ejecución principal:", error);
             }
         })();
+        //usar con thunder
+        `http://localhost:5012/peliculaTitulo?titulo=Dune%3A%20Part%20Two`
        ```
 
 ### **Descripción de los Métodos**
