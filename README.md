@@ -62,7 +62,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       })();
 
       //usar con thunder
-      `http://localhost:5012/allpeliculas?fechayhora=2024-06-20T14:00:00.000Z`
+      //GET
+      `http://localhost:5012//pelicula/v1?fechayhora=2024-06-20T14:00:00.000Z`
        ```
 
    - **API para Obtener Detalles de Película:**
@@ -108,7 +109,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
             }
         })();
         //usar con thunder
-        `http://localhost:5012/peliculaTitulo?titulo=Dune%3A%20Part%20Two`
+        //GET
+        `http://localhost:5012/pelicula/v2?titulo=Dune%3A%20Part%20Two`
        ```
 
 ### **Descripción de los Métodos**
@@ -373,6 +375,21 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
                 console.error("Error en la ejecución principal:", error);
             }
         })();
+
+        //usar con thunder
+        `http://localhost:5012/users/v1`
+
+        //POST
+        body
+        {
+          "_id": 38,
+          "nombre": "Julia Gómez",
+          "nick": "july",
+          "email": "Julia.gomez@example.com",
+          "cedula": 193747,
+          "telefono": 7843758,
+          "rol": "usuarioEstándar"
+        }
        ```
 
    - **API para Obtener Detalles de Usuario:**
@@ -407,6 +424,10 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```javascript
        let Cliente = new cliente()
       console.log(JSON.stringify(await Cliente.getAllUser(), null, 4))
+
+      //usar con thunder
+      //GET
+        `http://localhost:5012/users/v1`        
        ```
 
    - **API para Actualizar Rol de Usuario:**
@@ -429,6 +450,18 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```javascript
         let Cliente = new cliente()
         console.log(JSON.stringify(await Cliente.UpdateRolOfUser("lau", [{role: "usuarioVip", db: process.env.MONGO_DB }])));
+
+
+      //usar con thunder
+      //POST
+        `http://localhost:5012/users/v2`
+
+      //Body
+      {
+        "nick": "paty", 
+        "role": ["usuarioVip"]
+      }
+        
        ```
 
    - **API para Listar Usuarios con Filtro:**
@@ -465,6 +498,10 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ```javascript
         let Cliente = new cliente()
         console.log(JSON.stringify(await Cliente.getAllUserWithFilter('usuarioVip'), null, 4))
+
+      //usar con thunder
+      //GET
+        `http://localhost:5012/users/v2?rol=usuarioVip`
        ```
 
 ### **Descripción de los Métodos**

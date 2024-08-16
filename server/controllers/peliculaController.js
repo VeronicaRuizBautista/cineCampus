@@ -11,7 +11,6 @@ const getAllpelicula = async (req, res) => {
 
     try {
         const fechaHora = req.query.fechayhora; // Obtener parámetro de la consulta
-        const peliculaDto = new getAllPeliculaDTO({ fechayhora: fechaHora });
         const instance = Pelicula.getInstance;
         const result = await instance.getAllpelicula(fechaHora);
         res.status(200).json(result);

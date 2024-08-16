@@ -8,6 +8,7 @@ app.use(express.json());
 app.use('/css', express.static(path.join(__dirname, process.env.EXPRESS_STATIC, 'css')));
 app.use('/js', express.static(path.join(__dirname, process.env.EXPRESS_STATIC, 'js')));
 app.use('/storage', express.static(path.join(__dirname, process.env.EXPRESS_STATIC, 'storage')));
+//app.use('/', express.static(path.join(__dirname, process.env.EXPRESS_STATIC, 'ws.js')));
 
 
 app.use(router);
@@ -16,7 +17,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, process.env.EXPRESS_STATIC, 'index.html'));
 })
 app.get('/servicio', (req, res) => {
-    res.sendFile(path.join(__dirname, process.env.EXPRESS_STATIC, 'views/service.html'));
+    res.sendFile(path.join(__dirname, process.env.EXPRESS_STATIC, 'views/user.html'));
 })
 
 //app.get('/pelicula', (req, res) => {

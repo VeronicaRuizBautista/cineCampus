@@ -1,4 +1,5 @@
-const connect = require('../helper/connection.js')
+const connect = require('../helper/connection.js');
+const { use } = require('../router.js');
 
 class user extends connect{
     static instance;
@@ -141,10 +142,10 @@ class user extends connect{
  * @throws {Error} Lanza un error si ocurre un problema durante la conexión a la base de datos, la obtención de la información del usuario,
  *                 la revocación de roles o la asignación de nuevos roles.
  */
-    async UpdateRolOfUser(user, data){
+    async UpdateRolOfUser(user){
         try{
             await this.reconnect();
-            const userInfo = await this.db.command({ usersInfo: user });
+            const userInfo = await this.db.command({ usersInfo: user.nick });
             if (userInfo.users.length == 0) {
                 console.log("El usuario no existe.");
                 this.close()
@@ -157,14 +158,15 @@ class user extends connect{
             // Revocar roles actuales
             if (currentRoles.length > 0) {
                 await this.db.command({
-                    revokeRolesFromUser: user,
+                    revokeRolesFromUser: user.nick,
                     roles: currentRoles.map(role => ({ role: role.role, db: process.env.MONGO_DB }))
                 });
             }
+            const newRoles = user.role.map(role => ({ role: role, db: process.env.MONGO_DB }));
             // Asignar nuevos roles
             const usuario = await this.db.command({
-                grantRolesToUser: user,
-                roles: data 
+                grantRolesToUser: user.nick,
+                roles: newRoles
             });
             await this.close()
             return {mensaje: "El rol del usuario fue actualizado", datos: usuario}
