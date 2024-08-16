@@ -25,4 +25,9 @@ router.get('/pelicula/v1', PeliculaValidationRules(), getAllpelicula)
 router.get('/pelicula/v2', OnePeliculaValidationRules(), getOnepelicula)
 
 
+const {asientoDisponibilidad} = require('./controllers/asientoController');
+const {AsientoValidationByFuncion} = require('./validators/asientoValidator');
+
+router.get('/asiento/v1', AsientoValidationByFuncion(), asientoDisponibilidad)
+
 module.exports = router;

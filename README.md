@@ -129,6 +129,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 - **Retorno:**
   - Objeto con los detalles de la película y sus horarios de proyección.
 
+
+
 2. **Compra de Boletos:**
 
 - **API para Verificar Disponibilidad de Asientos:**
@@ -162,6 +164,10 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
             console.error("Error en la ejecución principal:", error);
         }
     })();
+
+        //usar con thunder
+        //GET
+        `http://localhost:5012/asiento/v1?idFuncion=7`
     ```
 
 ### **Descripción de los Métodos**

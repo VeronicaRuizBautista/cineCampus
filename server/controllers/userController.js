@@ -74,8 +74,8 @@ const UserByRol = async (req, res) => {
         const result = await instance.getAllUserWithFilter(data);
         res.status(200).json(result);
     } catch (error) {
-        console.error("Error al actualizar usuario", error);
-        res.status(500).json({ mensaje: "Error al actualizar usuario" });
+        console.error("Error al mostrar usuario", error);
+        res.status(500).json({ mensaje: "Error al mostrar usuario" });
     }
 }
 
