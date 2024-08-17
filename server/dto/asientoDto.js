@@ -1,18 +1,16 @@
-class UserDTO {
-    constructor({_id, nombre, nick,  email, cedula, telefono, rol}) {
+class asientoDTO {
+    constructor({_id, tipo, idFuncion,  nombreAsiento, fechaActual }) {
         this._id = _id;
-        this.nombre = nombre;
-        this.nick = nick;
-        this.email = email;
-        this.cedula = cedula;
-        this.telefono = telefono;
-        this.rol = rol;
+        this.tipo = tipo;
+        this.idFuncion = idFuncion;
+        this.nombreAsiento = nombreAsiento;
+        this.fechaActual = fechaActual;
     }
 }
-class UpdateRolUserDto {
-    constructor({ nick, role}) {
-        this.nick = nick;
-        this.role = role;
+class cancelarAsientoDTO {
+    constructor({ nombreAsiento, fechaAdquisicion}) {
+        this.nombreAsiento = nombreAsiento;
+        this.fechaAdquisicion = fechaAdquisicion;
     }
 }
 
@@ -23,6 +21,6 @@ class UpdateRolUserDto {
 // }
 
 module.exports = {
-    UserDTO, 
-    UpdateRolUserDto,
+    asientoDTO,
+    cancelarAsientoDTO 
 }

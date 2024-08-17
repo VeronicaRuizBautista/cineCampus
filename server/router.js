@@ -27,7 +27,15 @@ router.get('/pelicula/v2', OnePeliculaValidationRules(), getOnepelicula)
 
 const {asientoDisponibilidad} = require('./controllers/asientoController');
 const {AsientoValidationByFuncion} = require('./validators/asientoValidator');
+const {compraAsiento} = require('./controllers/asientoController');
+const {asientoValidationRules} = require('./validators/asientoValidator');
+const {cancelarAsiento} = require('./controllers/asientoController');
+const {candelarAsientoValidationRules} = require('./validators/asientoValidator');
 
 router.get('/asiento/v1', AsientoValidationByFuncion(), asientoDisponibilidad)
+router.post('/asiento/v1', asientoValidationRules(), compraAsiento)
+router.delete('/asiento/v1', candelarAsientoValidationRules(), cancelarAsiento)
+
+
 
 module.exports = router;

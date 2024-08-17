@@ -63,7 +63,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
       //usar con thunder
       //GET
-      `http://localhost:5012//pelicula/v1?fechayhora=2024-06-20T14:00:00.000Z`
+      `http://localhost:5012/pelicula/v1?fechayhora=2024-06-20T14:00:00.000Z`
        ```
 
    - **API para Obtener Detalles de Película:**
@@ -224,6 +224,19 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
           }
       })();
 
+
+        //usar con thunder
+        //POST
+        `http://localhost:5012/asiento/v1`
+
+        //Body
+        {
+          "_id": 24,
+          "tipo": "reserva",
+          "idFuncion": 10,
+          "nombreAsiento": "E3",
+          "fechaActual" : new Date("2024-05-01T10:15:00Z")
+        }
     ```
 
 - **API para Cancelar Reserva de Asientos:**
@@ -257,6 +270,16 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
             console.error("Error en la ejecución principal:", error);
         }
     })();
+
+
+        //usar con thunder
+        //DELETE
+        `http://localhost:5012/asiento/v1`
+
+        //Body
+        {
+          "nombreAsiento": "A2", "fechaAdquisicion":"2024-07-01T10:15:00.000Z"
+        }
     ```
 
 ### **Descripción de los Métodos**
