@@ -36,6 +36,7 @@ router.get('/asiento/v1', AsientoValidationByFuncion(), asientoDisponibilidad)
 router.post('/asiento/v1', asientoValidationRules(), compraAsiento)
 router.delete('/asiento/v1', candelarAsientoValidationRules(), cancelarAsiento)
 
-
+const {validarTarjeta} = require('./controllers/tarjetaController');
+router.get('/tarjeta/v1', validarTarjeta)
 
 module.exports = router;

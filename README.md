@@ -337,6 +337,10 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
             console.error("Error en la ejecución principal:", error);
         }
     })();
+
+        //usar con thunder
+        //GET
+        `http://localhost:5012/tarjeta/v1`
     ```
 
 ### **Descripción del Método**
