@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const path = require('path');
 
-
+router.get('/user', (req, res) => {
+    res.sendFile(path.join(__dirname, process.env.EXPRESS_STATIC, 'views/user.html'));
+})
 
 const { createUser } = require('./controllers/userController');
 const { userValidationRules } = require('./validators/userValidator');
