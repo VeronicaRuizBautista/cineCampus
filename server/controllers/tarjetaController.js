@@ -15,7 +15,7 @@ const validarTarjeta = async (req, res) => {
         res.status(200).json(result);
     } catch (error) {
         console.error("Error al crear usuario", error);
-        res.status(500).json({ mensaje: "Error al crear usuario" });
+        res.status(500).json({ mensaje: "Error al validar tarjeta" });
     }
 }
 

@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const getAllPeliculaDTO = require('../dto/peliculaDto.js');
+const {PeliculaDTO} = require('../dto/peliculaDto.js');
 const Pelicula = require('../model/peliculaModel.js');
 
 const getAllpelicula = async (req, res) => {
@@ -11,9 +11,11 @@ const getAllpelicula = async (req, res) => {
 
     try {
         const fechaHora = req.query.fechayhora; // Obtener parámetro de la consulta
+        const peliculaDto = new PeliculaDTO()
         const instance = Pelicula.getInstance;
         const result = await instance.getAllpelicula(fechaHora);
-        res.status(200).json(result);
+        let data = (result.length) ? peliculaDto.templateListPelis(result): peliculaDto.templateNoPeliBytittle()
+        res.status(data.status).json(data);
     } catch (error) {
         console.error("Error al obtener las películas:", error);
         res.status(500).json({ mensaje: "Error al obtener las películas" });
@@ -21,7 +23,7 @@ const getAllpelicula = async (req, res) => {
 };
 
 
-const getOnePeliculaDTO = require('../dto/peliculaDto.js');
+
 
 const getOnepelicula = async (req, res) => {
     const errors = validationResult(req);
@@ -30,12 +32,12 @@ const getOnepelicula = async (req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const { titulo } = req.query; 
-        //const OnepeliculaDto = new getOnePeliculaDTO({ titulo });
+        const titulo  = req.params.titulo
+        const peliculaDto = new PeliculaDTO()
         const pelicula = Pelicula.getInstance;
-        //console.log(OnepeliculaDto)
         const result = await pelicula.getOnepelicula(titulo);
-        res.status(200).json(result);
+        let data = (result.length) ? peliculaDto.templateListPelis(result): peliculaDto.templateNoPeliBytittle()
+        res.status(data.status).json(data);
     } catch (error) {
         console.error("Error al obtener la película:", error);
         res.status(500).json({ mensaje: "Error al obtener la película" });

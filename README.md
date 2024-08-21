@@ -110,7 +110,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
         })();
         //usar con thunder
         //GET
-        `http://localhost:5012/pelicula/v2?titulo=Dune%3A%20Part%20Two`
+        `http://localhost:5012/pelicula/v2/Dune: Part Two`
        ```
 
 ### **Descripción de los Métodos**
@@ -231,11 +231,11 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
         //Body
         {
-          "_id": 24,
-          "tipo": "reserva",
-          "idFuncion": 10,
-          "nombreAsiento": "E3",
-          "fechaActual" : new Date("2024-05-01T10:15:00Z")
+            "_id": 24,
+            "tipo": "reserva",
+            "idFuncion": 7,
+            "nombreAsiento": "F1",
+            "fechaActual" : "2024-07-06T22:30:00.000+00:00"
         }
     ```
 
@@ -491,7 +491,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
       //Body
       {
-        "nick": "paty", 
+        "nick": "mariap", 
         "role": ["usuarioVip"]
       }
         

@@ -1,26 +1,48 @@
 class asientoDTO {
-    constructor({_id, tipo, idFuncion,  nombreAsiento, fechaActual }) {
-        this._id = _id;
-        this.tipo = tipo;
-        this.idFuncion = idFuncion;
-        this.nombreAsiento = nombreAsiento;
-        this.fechaActual = fechaActual;
+    templateNoFuncion(){
+        return{
+            status: 404,
+            message: "No hay funciones con ese id"
+        }
+    }
+    templateAsientosDisponibles(arg){
+        return{
+            status: 200,
+            data: arg
+        }
+    }
+    templateFuncion(arg){
+        return{
+            status: 200,
+            data: arg
+        }
+    }
+    templateMoviemiento(arg){
+        return{
+            status: 200,
+            data: arg
+        }
+    }
+    templateNoMovimiento(){
+        return{
+            status: 404,
+            message: "No hay movimientos con ese id"
+        }
+    }
+    templateAsiento(arg){
+        return{
+            status: 200,
+            data: arg
+        }
+    }
+    templateNoAsiento(){
+        return{
+            status: 404,
+            message: "El asiento ingresado no existe"
+        }
     }
 }
-class cancelarAsientoDTO {
-    constructor({ nombreAsiento, fechaAdquisicion}) {
-        this.nombreAsiento = nombreAsiento;
-        this.fechaAdquisicion = fechaAdquisicion;
-    }
-}
-
-// class RolUserDto {
-//     constructor({rol}) {
-//         this.rol = rol;
-//     }
-// }
 
 module.exports = {
     asientoDTO,
-    cancelarAsientoDTO 
 }

@@ -129,12 +129,7 @@ class Pelicula extends connect{
                       },
                     }
                   ]).toArray();
-                if (res.length === 0) {
-                    let console = "No hay ninguna película que coincida con el título proporcionado";
-                    return console
-                } else {
-                    return res;
-                }
+                return res
             
         }catch(error){
             console.error("Error al obtener la película:", error)

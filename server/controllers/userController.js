@@ -14,7 +14,7 @@ const createUser = async (req, res) => {
         const arg = req.body; // Obtener parámetro de la consulta
         const userDto = new UserDTO();
         const instance = user.getInstance;
-        const result = await instance.userExist(arg);
+        let result = await instance.userExist(arg);
         let data = (result) ? userDto.templateExistUsers(arg): userDto.templateNoUsers()
         if(data.status == 200) res.status(data.status).json(data);
         if (data.status == 404) result = await instance.saveUser(arg);
@@ -41,8 +41,8 @@ const AllUser = async (req, res) => {
         const instance = user.getInstance;
         const allUserDto = new UserDTO()
         const result = await instance.getAllUser();
-        let data = (result.length) ? allUserDto.templateListUsers(result): allUserDto.templateNoUsers(result)
-         res.status(data.status).json(data);
+        let data = (result.length) ? allUserDto.templateListUsers(result): allUserDto.templateNoUsers()
+        res.status(data.status).json(data);
     } catch (error) {
         console.error("Error al mostrar usuarios", error);
         res.status(500).json({ mensaje: "Error al mostrar usuarios" });

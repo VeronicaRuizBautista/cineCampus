@@ -1,4 +1,5 @@
-const { query } = require('express-validator');
+const { query, body, param } = require('express-validator');
+
 
 exports.PeliculaValidationRules = () => {
     return [
@@ -12,7 +13,7 @@ exports.PeliculaValidationRules = () => {
 
 exports.OnePeliculaValidationRules = () => {
     return [
-        query('titulo')
+        param('titulo')
             .notEmpty().withMessage('El título no puede estar vacío')
             .isString().withMessage('Debe ser una cadena de texto') 
     ];

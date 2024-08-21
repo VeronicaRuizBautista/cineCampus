@@ -22,7 +22,7 @@ const {getOnepelicula} = require('./controllers/peliculaController');
 const {OnePeliculaValidationRules} = require('./validators/peliculaValidator');
 
 router.get('/pelicula/v1', PeliculaValidationRules(), getAllpelicula)
-router.get('/pelicula/v2', OnePeliculaValidationRules(), getOnepelicula)
+router.get('/pelicula/v2/:titulo', OnePeliculaValidationRules(), getOnepelicula)
 
 
 const {asientoDisponibilidad} = require('./controllers/asientoController');

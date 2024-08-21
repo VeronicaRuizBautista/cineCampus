@@ -1,6 +1,6 @@
 const {validationResult} = require('express-validator');
 
-const {asientoDTO, cancelarAsientoDTO } = require('../dto/asientoDto.js');
+const {asientoDTO } = require('../dto/asientoDto.js');
 const asiento = require('../model/asientoModel.js')
 
 const asientoDisponibilidad = async (req, res) => {
@@ -11,10 +11,16 @@ const asientoDisponibilidad = async (req, res) => {
     }
 
     try {
-        const data = req.query.idFuncion;
+        const arg = req.query.idFuncion;
+        const AsientoDto = new asientoDTO()
         const instance = asiento.getInstance;
-        const result = await instance.getSeatAvailability(data);
-        res.status(200).json(result);
+        const funcion = await instance.FuncionExist(arg)
+        let result
+        let validfuncion = (funcion) ? AsientoDto.templateFuncion(funcion): AsientoDto.templateNoFuncion()
+        if (validfuncion.status == 404) res.status(validfuncion.status).json(validfuncion);
+        if (validfuncion.status == 200) result = await instance.getSeatAvailability(funcion);
+        let data = (result.length) ? AsientoDto.templateAsientosDisponibles(result): AsientoDto.templateNoFuncion()
+        res.status(data.status).json(data);
     } catch (error) {
         console.error("Error al ver la disponibilidad de asientos", error);
         res.status(500).json({ mensaje: "Error al ver la disponibilidad de asientos" });
@@ -51,7 +57,7 @@ const cancelarAsiento = async (req, res) => {
         const data = req.body; // Obtener parámetro de la consulta
         const cancelarAsientodto = new cancelarAsientoDTO(data);
         const instance = asiento.getInstance;
-        const result = await instance.seatReservation(cancelarAsientodto);
+        const result = await instance.cancelSeatReservation(cancelarAsientodto);
         res.status(200).json(result);
     } catch (error) {
         console.error("Error al crear usuario", error);

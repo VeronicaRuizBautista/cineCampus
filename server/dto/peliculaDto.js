@@ -1,19 +1,27 @@
-class getAllPeliculaDTO {
-    constructor({ fechayhora }) {
-        this.fechayhora = fechayhora;
+class PeliculaDTO {
+    templateNoPeli(){
+        return{
+            status: 404,
+            message: "No hay peliculas registradas"
+        }
+    }
+    templateListPelis(arg){
+        return{
+            status: 200,
+            data: arg
+        }
+    }
+    templateNoPeliBytittle(){
+        return{
+            status: 404,
+            message: "No hay ninguna película que coincida con el título proporcionado"
+        }
     }
 }
 
-class getOnePeliculaDTO {
-    constructor({ titulo }) {
-        this.titulo = titulo;
-    }
-}
 
-module.exports = {
-    getAllPeliculaDTO,
-    getOnePeliculaDTO
-};
+
+module.exports = {PeliculaDTO};
 
 
 
