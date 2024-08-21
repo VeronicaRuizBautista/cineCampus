@@ -1,12 +1,35 @@
 class UserDTO {
-    constructor({_id, nombre, nick,  email, cedula, telefono, rol}) {
-        this._id = _id;
-        this.nombre = nombre;
-        this.nick = nick;
-        this.email = email;
-        this.cedula = cedula;
-        this.telefono = telefono;
-        this.rol = rol;
+    templateExistUsers({cedula, nick, email}){
+        return{
+            status: 200,
+            message: "ya existe un usuario con los siguientes datos",
+            data: {cedula, nick, email}
+        }
+    }
+    templateNoUsers(){
+        return{
+            status: 404,
+            message: "No hay usuarios registrados"
+        }
+    }
+    templateListUsers(arg){
+        return{
+            status: 200,
+            data: arg
+        }
+    }
+    templateUserSave(arg){
+        return{
+            status: 201,
+            data: arg
+        }
+    }
+    errorUser(arg){
+        return{
+            status: 500,
+            message: "Ocurrio un error",
+            data: arg
+        }
     }
 }
 class UpdateRolUserDto {
@@ -16,13 +39,10 @@ class UpdateRolUserDto {
     }
 }
 
-// class RolUserDto {
-//     constructor({rol}) {
-//         this.rol = rol;
-//     }
-// }
+
 
 module.exports = {
     UserDTO, 
     UpdateRolUserDto,
+    
 }

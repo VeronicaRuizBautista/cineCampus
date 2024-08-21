@@ -11,11 +11,19 @@ const createUser = async (req, res) => {
     }
 
     try {
-        const data = req.body; // Obtener parámetro de la consulta
-        const userDto = new UserDTO(data);
+        const arg = req.body; // Obtener parámetro de la consulta
+        const userDto = new UserDTO();
         const instance = user.getInstance;
-        const result = await instance.createClientAndUser(userDto);
-        res.status(200).json(result);
+        const result = await instance.userExist(arg);
+        let data = (result) ? userDto.templateExistUsers(arg): userDto.templateNoUsers()
+        if(data.status == 200) res.status(data.status).json(data);
+        if (data.status == 404) result = await instance.saveUser(arg);
+        data = (result.acknowledged) ? userDto.templateUserSave(arg): userDto.errorUser(result)
+        if(data.status == 500) res.status(data.status).json(data);
+        if (data.status == 201) result = await instance.createUser(arg);
+        data = (result.ok) ? userDto.templateUserSave(arg): userDto.errorUser(result)
+        if(data.status == 500) res.status(data.status).json(data);
+        res.status(data.status).json(data);
     } catch (error) {
         console.error("Error al crear usuario", error);
         res.status(500).json({ mensaje: "Error al crear usuario" });
@@ -31,8 +39,10 @@ const AllUser = async (req, res) => {
 
     try {
         const instance = user.getInstance;
+        const allUserDto = new UserDTO()
         const result = await instance.getAllUser();
-        res.status(200).json(result);
+        let data = (result.length) ? allUserDto.templateListUsers(result): allUserDto.templateNoUsers(result)
+         res.status(data.status).json(data);
     } catch (error) {
         console.error("Error al mostrar usuarios", error);
         res.status(500).json({ mensaje: "Error al mostrar usuarios" });
@@ -50,8 +60,8 @@ const UpdateUser = async (req, res) => {
     }
 
     try {
-        const data = req.body; // Obtener parámetro de la consulta
-        const UpdateRolUser = new UpdateRolUserDto(data);
+        const arg = req.body; // Obtener parámetro de la consulta
+        const UpdateRolUser = new UpdateRolUserDto(arg);
         const instance = user.getInstance;
         const result = await instance.UpdateRolOfUser(UpdateRolUser);
         res.status(200).json(result);
@@ -69,9 +79,9 @@ const UserByRol = async (req, res) => {
     }
 
     try {
-        const data = req.query.rol;
+        const arg = req.query.rol;
         const instance = user.getInstance;
-        const result = await instance.getAllUserWithFilter(data);
+        const result = await instance.getAllUserWithFilter(arg);
         res.status(200).json(result);
     } catch (error) {
         console.error("Error al mostrar usuario", error);

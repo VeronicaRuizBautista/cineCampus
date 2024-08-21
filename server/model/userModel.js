@@ -35,25 +35,34 @@ class user extends connect{
  * {"mensaje":"El usuario fue creado","datos":{"acknowledged":true,"insertedId":21},"usuario":{"ok":1}}
  * 
  */
-
-    async createClientAndUser(data){
+    async userExist({cedula: codigo, nick: apodo, email:correo}){
+        await this.reconnect();
+        let collection = this.db.collection("cliente");
+        let [res] = await collection.find({
+            $or:[
+                {nick: apodo},
+                {cedula: codigo},
+                {email:correo}
+            ]
+        }).toArray();
+        await this.close()
+        return res
+    }
+    async saveUser(data){
+        await this.reconnect();
+        let collection = this.db.collection("cliente");
+        let {_id, nombre, nick: apodo, email:correo, cedula: codigo, telefono, rol} = data
+        const res = await collection.insertOne({
+            _id, nombre, nick: apodo, email:correo, cedula: codigo, telefono, rol
+        })
+        await this.close()
+        return res
+    }
+    async createUser(data){
         try{
             await this.reconnect();
-            let collection = this.db.collection("cliente");
             let {_id, nombre, nick: apodo, email:correo, cedula: codigo, telefono, rol} = data
-
-            let condicion = await collection.find({
-                $or:[
-                    {nick: apodo},
-                    {cedula: codigo},
-                    {email:correo}
-                ]
-            }).toArray();
-            if(condicion.length) return {mensaje: "El usuario ya existe", user: condicion}
-            const res = await collection.insertOne({
-                _id, nombre, nick: apodo, email:correo, cedula: codigo, telefono, rol
-            })
-            const usuario = await this.db.command({
+            const res = await this.db.command({
                 createUser: apodo,
                 pwd: `${codigo}`,
                 roles: [
@@ -61,7 +70,7 @@ class user extends connect{
                 ]
             });
             await this.close()
-            return {mensaje: "El usuario fue creado", datos: res, usuario: usuario}
+            return res;
         } catch(error){
             console.error("Error al crear el usuario:", error)
         }
@@ -115,7 +124,7 @@ class user extends connect{
                 }
             ]).toArray();
             await this.close();
-            return { mensaje: "Usuarios obtenidos", usuarios: detalles }; 
+            return detalles; 
         } catch (error) {
             console.error("Error al obtener los usuarios:", error);
             return { mensaje: "Error al obtener los usuarios", error: error.message };
