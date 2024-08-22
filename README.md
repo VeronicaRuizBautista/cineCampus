@@ -231,7 +231,6 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
         //Body
         {
-            "_id": 24,
             "tipo": "reserva",
             "idFuncion": 7,
             "nombreAsiento": "F1",

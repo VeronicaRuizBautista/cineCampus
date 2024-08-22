@@ -11,9 +11,6 @@ exports.AsientoValidationByFuncion = () => {
 
 exports.asientoValidationRules = () => {
     return [
-         body('_id')
-         .isInt({ min: 1 }).withMessage('_id debe ser un número entero positivo'),
-
         body('tipo')
             .isString().withMessage('tipo debe ser un string')
             .isIn(['reserva', 'compra']).withMessage('tipo debe ser "reserva" o "compra"'),
