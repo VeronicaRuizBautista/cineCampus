@@ -99,6 +99,19 @@ class asientoDTO {
             data: arg
         }
     }
+    templateNoBoleta(){
+        return{
+            status: 500,
+            message: "Error al crear boleta"
+        }
+    }
+
+    templateBoleta(arg){
+        return{
+            status: 200,
+            data: arg
+        }  
+    } 
 }
 
 module.exports = {

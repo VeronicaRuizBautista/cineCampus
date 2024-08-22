@@ -35,6 +35,13 @@ class user extends connect{
  * {"mensaje":"El usuario fue creado","datos":{"acknowledged":true,"insertedId":21},"usuario":{"ok":1}}
  * 
  */
+
+    async ClienteCantidad(){
+        await this.reconnect();
+        let collecionCliente = this.db.collection("cliente");
+        let clienteCantidad = await collecionCliente.countDocuments()
+        return clienteCantidad
+    }
     async userExist({cedula: codigo, nick: apodo, email:correo}){
         await this.reconnect();
         let collection = this.db.collection("cliente");
@@ -51,7 +58,9 @@ class user extends connect{
     async saveUser(data){
         await this.reconnect();
         let collection = this.db.collection("cliente");
-        let {_id, nombre, nick: apodo, email:correo, cedula: codigo, telefono, rol} = data
+        let {nombre, nick: apodo, email:correo, cedula: codigo, telefono, rol} = data
+        let _id = await this.ClienteCantidad()
+        _id +=1;
         const res = await collection.insertOne({
             _id, nombre, nick: apodo, email:correo, cedula: codigo, telefono, rol
         })
@@ -61,7 +70,7 @@ class user extends connect{
     async createUser(data){
         try{
             await this.reconnect();
-            let {_id, nombre, nick: apodo, email:correo, cedula: codigo, telefono, rol} = data
+            let {nombre, nick: apodo, email:correo, cedula: codigo, telefono, rol} = data
             const res = await this.db.command({
                 createUser: apodo,
                 pwd: `${codigo}`,

@@ -19,6 +19,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     EXPRESS_STATIC="public"
     EXPRESS_PORT=5012
     EXPRESS_HOST="localhost"
+
+    `mongodb://anaT:12345678@172.16.102.13:27017/cinecampus`
 ```
 
 ### **Requisitos Funcionales**
@@ -276,9 +278,10 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
         `http://localhost:5012/asiento/v1`
 
         //Body
-        {
-          "nombreAsiento": "A2", "fechaAdquisicion":"2024-07-01T10:15:00.000Z"
-        }
+          {
+            "nombreAsiento": "G2", 
+            "fechaAdquisicion":"2024-07-02T14:30:00.000+00:00"
+          }
     ```
 
 ### **Descripción de los Métodos**
@@ -414,7 +417,6 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
         //POST
         body
         {
-          "_id": 38,
           "nombre": "Julia Gómez",
           "nick": "july",
           "email": "Julia.gomez@example.com",

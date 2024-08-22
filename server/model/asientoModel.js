@@ -24,13 +24,19 @@ class Asiento extends connect {
      */
 
     async FuncionExist(idFuncion){
-        let data = parseInt(idFuncion);
-        await this.reconnect();
-        let collectionFuncion = this.db.collection("funcion");
-        let funcion = await collectionFuncion.findOne({ _id: data });
-        await this.close()
-        return funcion
+        try{
+            await this.reconnect();
+            let data = parseInt(idFuncion);
+            let collectionFuncion = this.db.collection("funcion");
+            let funcion = await collectionFuncion.findOne({ _id: data });
+            await this.close()
+            return funcion
+        } catch (error) {
+            console.error("Error al obtener los asientos:", error);
+            throw error;
+        }
     }
+
     async getSeatAvailability(funcion) {
         try {
             await this.reconnect();
@@ -59,11 +65,12 @@ class Asiento extends connect {
             let asientodb = this.db.collection("asiento");
             let totalAsientos = await asientodb.find({ idSala: sala }).toArray();
             let asientosDisponibles = totalAsientos.filter(asiento => !asientosOcupados.includes(asiento._id));
+            await this.close()
             return asientosDisponibles;
             
         } catch (error) {
             console.error("Error al obtener los asientos:", error);
-            throw error; // Asegúrate de lanzar el error para que el llamador pueda manejarlo
+            throw error;
         }
     }
 
@@ -88,13 +95,18 @@ class Asiento extends connect {
  * luego verifica si el movimiento ya existe. Si no existe, valida la existencia de la función y la disponibilidad del 
  * asiento. Si todas las validaciones son exitosas, realiza la reserva y guarda la información en la base de datos.
  */
-    async MovimientoCantidad(data){
+    async MovimientoCantidad(){
         await this.reconnect();
         let collectionMovimiento = this.db.collection("movimiento");
-        // let existeMovimiento = await collectionMovimiento.findOne({_id: data._id});
-        // await this.close()
-        // return existeMovimiento
+        let movimientoCantidad = await collectionMovimiento.countDocuments()
+        return movimientoCantidad
     }
+    async AsientoEncontrado(disponibilidad, idAsiento){
+        await this.reconnect();
+        const asientoEncontrado = disponibilidad.find(asiento => asiento._id == idAsiento);
+        return asientoEncontrado
+    }
+    
     async SaveMovimiento(data){
         await this.reconnect();
         let cliente = process.env.MONGO_USER
@@ -102,7 +114,6 @@ class Asiento extends connect {
         let clientes = await this.db.collection("cliente")
         let datocliente = await clientes.find({nick: cliente}).toArray()
         if(datocliente.length == 0){
-            this.close();
             return{mensaje: "El cliente ingresado no existe en la base de datos"}
         }else{
             idCliente = datocliente[0]._id          
@@ -110,7 +121,6 @@ class Asiento extends connect {
         let collectionMovimiento = this.db.collection("movimiento");
         let idMovimiento = await this.MovimientoCantidad()
         idMovimiento +=1;
-        console.log(idMovimiento)
         let movimiento = await collectionMovimiento.insertOne(
             {
                 _id: idMovimiento,
@@ -119,15 +129,13 @@ class Asiento extends connect {
                 idFuncion: data.idFuncion
             }
         )
-        await this.close()
         return movimiento
     }
-    async BoletaCantidad(data){
+    async BoletaCantidad(){
         await this.reconnect();
-        let collectionMovimiento = this.db.collection("movimiento");
-        // let existeMovimiento = await collectionMovimiento.findOne({_id: data._id});
-        // await this.close()
-        // return existeMovimiento
+        let collectionBoleta = this.db.collection("boleta");
+        let boletaCantidad = await collectionBoleta.countDocuments()
+        return boletaCantidad
     }
     async AsientoExist(data){
         await this.reconnect();
@@ -140,20 +148,20 @@ class Asiento extends connect {
 
     async seatReservation(data, idAsiento){
         try{
-            await this.reconnect()  
+            await this.reconnect();
             let idBoleta = await this.BoletaCantidad()
-            console.log(idBoleta)
             idBoleta +=1;
+            let idMovimiento = await this.MovimientoCantidad()
             let collectionBoleta = this.db.collection("boleta")
             let boleta = await collectionBoleta.insertOne(
                 {
-                    _id: data._id,
-                    idMovimiento: data._id,
+                    _id: idBoleta,
+                    idMovimiento: idMovimiento,
                     idAsiento: idAsiento,
                     fecha: new Date(data.fechaActual)
                 }
             )
-            return boleta        
+            return boleta       
         }catch(error){
             console.error("Error al obtener los asientos:", error)
         }
@@ -211,12 +219,14 @@ class Asiento extends connect {
     }
 
     async cancelSeatReservation(data, idAsiento, idMovimiento){
+        await this.reconnect();
         try{
             await this.reconnect()
             let fecha = data.fechaAdquisicion         
             let boletas = await this.db.collection("boleta")
-            let boleta = await boletas.findOne({idAsiento: idAsiento, idMovimiento:{$in: idMovimiento}, fecha: new Date(fecha)})
-            let deleteboleta = await boletas.deleteOne({_id:boleta._id})
+            let boleta = await boletas.find({idAsiento: idAsiento, idMovimiento:{$in: [idMovimiento]}, fecha: new Date(fecha)}).toArray()
+            let deleteboleta = await boletas.deleteOne({_id:boleta[0]._id})
+            await this.close()  
             return deleteboleta
         }catch(error){
             console.error("Error al obtener los asientos:", error)

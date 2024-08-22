@@ -3,7 +3,6 @@ const {body} = require('express-validator')
 
 exports.userValidationRules = () => {
     return [
-        body('_id').isInt({ gt: 0 }).withMessage('_id debe ser un número entero positivo'),
 
         body('nombre')
             .isString().withMessage('Nombre debe ser una cadena de texto')
