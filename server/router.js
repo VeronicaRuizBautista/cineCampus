@@ -1,9 +1,7 @@
 const router = require('express').Router();
 const path = require('path');
 
-router.get('/user', (req, res) => {
-    res.sendFile(path.join(__dirname, process.env.EXPRESS_STATIC, 'views/user.html'));
-})
+
 
 const { createUser } = require('./controllers/userController');
 const { userValidationRules } = require('./validators/userValidator');
@@ -12,6 +10,9 @@ const {UpdateUser} = require('./controllers/userController');
 const { updateUserValidationRules } = require('./validators/userValidator');
 const {UserByRol} = require('./controllers/userController');
 const { UserValidationRulesByRole } = require('./validators/userValidator');
+
+const {getNombreUser} = require('./controllers/userController')
+router.get('/username', getNombreUser)
 
 router.post('/users/v1', userValidationRules(), createUser);
 router.get('/users/v1', AllUser);

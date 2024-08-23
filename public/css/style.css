@@ -181,20 +181,31 @@ body {
 
 .ejemplo-poster {
   display: flex;
+
   flex-direction: column;
   /* background-color: #b83f3f; */
-  margin-right: 5vw;
+  margin-left: 5vw;
   border-radius: var(--br-xl);
   width: 50%;
   /* object-fit: cover; */
+}
+.ejemplo-poster:first-of-type {
+  /* background-color: #b83f3f; */
+  margin-left: 450vw;
+}
+.ejemplo-poster:last-of-type {
+  /* background-color: #b83f3f; */
+  margin-right: 5vw;
 }
 .box-img{
   display: flex;
   background-color: #b83f3f;
   border-radius: var(--br-xl);
-  height: 80%;
+  box-sizing: border-box;
 }
 .box-img img{
+  width: 40vw;
+  height: 30vh;
   object-fit: cover;
 }
 .detalles-movie {

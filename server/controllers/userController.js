@@ -48,6 +48,17 @@ const AllUser = async (req, res) => {
         res.status(500).json({ mensaje: "Error al mostrar usuarios" });
     }
 }
+const getNombreUser = async (req, res) => {
+    try {
+        const instance = user.getInstance;
+        const result = await instance.nombreUser();
+        res.status(200).json(result);
+        return result
+    } catch (error) {
+        console.error("Error al mostrar nombre de usuario", error);
+        res.status(500).json({ mensaje: "Error al mostrar nombre de usuario" });
+    }
+}
 
 
 
@@ -93,7 +104,8 @@ module.exports = {
     createUser,
     AllUser,
     UpdateUser,
-    UserByRol
+    UserByRol,
+    getNombreUser
 };
 
 

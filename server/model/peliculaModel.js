@@ -43,6 +43,8 @@ class Pelicula extends connect{
                         genero: 1,
                         duracion: 1,
                         sinopsis: 1,
+                        img: 1,
+                        reparto: 1,
                         horarioProyeccion: {
                           idSala: 1,
                           fechaInicio: 1,

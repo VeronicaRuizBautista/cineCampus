@@ -55,6 +55,19 @@ class user extends connect{
         await this.close()
         return res
     }
+    async nombreUser(){
+        await this.reconnect();
+        let collection = this.db.collection("cliente");
+        let nick = process.env.MONGO_USER
+        let cedula = parseInt(process.env.MONGO_PWD)
+        let res = await collection.findOne(
+            {nick: nick, cedula: cedula}
+            
+        )
+        let respuesta = res.nombre
+        await this.close()
+        return respuesta
+    }
     async saveUser(data){
         await this.reconnect();
         let collection = this.db.collection("cliente");

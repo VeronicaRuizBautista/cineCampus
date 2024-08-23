@@ -9,15 +9,17 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" />
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script src="js/main.js" defer></script>
     </head>
-    <body>
+    <body id="app">
         <section class="home">
             <section class="encabezado">
                 <div class="info-perfil">
                     <div class="datos">
                         <img class="foto-perfil" loading="lazy" alt="" src="storage/img/fotoperfil.png" />
-                        <div class="texto-saludo">
-                            <h3 class="hi-nombre">Hi, Ferrucio Tuccine!</h3>
+                        <div class="texto-saludo" >
+                            <h3 class="hi-nombre">Hi, <span id="nombre">{{ nombreUsuario }}</span>!</h3>
                             <h3 class="lets-watch-movie">Let’s watch movie together!</h3>
                         </div>
                         <div class="box-campana">
@@ -41,36 +43,16 @@
                 </div>
             </div>
             <section class="movie-posters">
-                <div class="search-icon">
-                  <div class="ejemplo-poster">
+                <div class="search-icon" id="peliculas-app">
+                  <div class="ejemplo-poster" v-for="pelicula in peliculas" :key="pelicula._id">
                     <div class="box-img">
-                        <img class="poster1" loading="lazy" alt="" src="storage/img/ejemplo-poster1.png" />
+                        <img class="poster1" :src="pelicula.img" alt="" loading="lazy" />
                     </div>
                     <div class="detalles-movie">
-                        <h2 class="titulo-poster">puss in boots the last...</h2>
-                        <h1 class="genero-poster">Adventure</h1>
-                        
+                        <h2 class="titulo-poster">{{ pelicula.titulo }}</h2>
+                        <h1 class="genero-poster">{{ pelicula.genero.join(', ') }}</h1>
                     </div>
-                  </div>
-                  <div class="ejemplo-poster">
-                    <div class="box-img">
-                        <img class="poster2" loading="lazy" alt="" src="storage/img/ejemplo-poster2.png" />
-                    </div>
-                      <div class="detalles-movie">
-                          <h2 class="titulo-poster">puss in boots the last...</h2>
-                          <h1 class="genero-poster">Adventure</h1>
-                      </div>
-                  </div>
-                  <div class="ejemplo-poster">
-                    <div class="box-img">
-                        <img class="poster2" loading="lazy" alt="" src="storage/img/ejemplo-poster3.png" />
-                    </div>
-                    <div class="detalles-movie">
-                        <h2 class="titulo-poster">puss in boots the last...</h2>
-                        <h1 class="genero-poster">Adventure</h1>
-                    </div>
-                  </div>
-                </div>
+                  </div> 
                 </div>
             </section>
             <section class="Proximamente">
@@ -117,22 +99,21 @@
         </section>
     </body>
     <footer class="rectangle-parent">
-                <div class="tabs-content-parent">
-                    <div class="tabs-content">
-                        <div class="home-tab">
-                            <a class="icon-footer" href="#"><i class='bx bxs-home' style='color:#fe0000'  ></i></a>
-                            <a class="icon-footer" href="#"> <i class='bx bx-search-alt-2' style='color:#fffdfdb7'></i></a>
-                            <a class="icon-footer" href="#"><i class='bx bx-film' style='color:#fffdfdb7' ></i></a>
-                            <a class="icon-footer" href="#"><i class='bx bx-user'style='color:#fffdfdb7'></i></a>
-                        </div>
-                    </div>
-                    <div class="navigation-labels">
-                        <div class="home1">Home</div>
-                        <div class="browse">Browse</div>
-                        <div class="tickets">Tickets</div>
-                        <div class="profile">Profile</div>
-                    </div>
+        <div class="tabs-content-parent">
+            <div class="tabs-content">
+                <div class="home-tab">
+                    <a class="icon-footer" href="#"><i class='bx bxs-home' style='color:#fe0000'  ></i></a>
+                    <a class="icon-footer" href="#"> <i class='bx bx-search-alt-2' style='color:#fffdfdb7'></i></a>
+                    <a class="icon-footer" href="#"><i class='bx bx-film' style='color:#fffdfdb7' ></i></a>
+                    <a class="icon-footer" href="#"><i class='bx bx-user'style='color:#fffdfdb7'></i></a>
                 </div>
-            
+            </div>
+            <div class="navigation-labels">
+                <div class="home1">Home</div>
+                <div class="browse">Browse</div>
+                <div class="tickets">Tickets</div>
+                <div class="profile">Profile</div>
+            </div>
+        </div>
     </footer>
 </html>
