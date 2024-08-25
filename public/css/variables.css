@@ -26,6 +26,12 @@
   --blanco-transparente:#fffdfd95;
   --color-gray2-100: #272727;
   --color-gray-200: #121212;
+  --color-gray-300: rgba(255, 255, 255, 0.2);
+  --color-whitesmoke: #f8f6f6;
+  --color-darkslategray-100: #323232;
+  --color-darkslategray-200: #2f2f2f;
+  --color-darkgray-100: #969696;
+  --color-lightgray: #cecece;
 
   /* Gaps */
   --gap-xl: 20px;

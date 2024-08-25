@@ -1,0 +1,260 @@
+@import url(variables.css);
+
+*{
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    color: var(--color-white);
+    font-family: "Iner", sans-serif;
+}
+
+body {
+    margin: 0;
+    line-height: normal;
+    width: 100%;
+    background-color: var(--color-gray-200);
+    height: 100vh;
+}
+
+header{
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: rgb(18, 38, 55); */
+}
+.box1{
+    /* background-color: firebrick; */
+    height: 70%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.box1 i{
+    font-size: 10vw;
+}
+
+.screen{
+    width: 100%;
+    height: 30%;
+    /* background-color: rgb(117, 161, 47); */
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+.screen h5{
+    color: var(--blanco-transparente);
+}
+.screen img{
+    width: 85%;
+    position: absolute;
+    top: 10vh;
+}
+
+
+main{
+    margin-top: 5vh;
+    width: 100%;
+    /* background-color: lightslategrey; */
+    height: 45vh;
+}
+.asiento-vip{
+    width: 100%;
+    /* background-color: rgb(156, 225, 65); */
+    height: 25%;
+}
+.a{
+    margin-left: 5vw;
+    width: 80%;
+    /* background-color: tomato; */
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+.a .asientos{
+    width: 85%;
+    height: 100%;
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1.5vw;
+}
+.asientos div{
+    background-color: var(--color-darkslategray-100);
+    width: 8vw;
+    height: 5vh;
+    border-radius: 2vw;
+}
+.b{
+    margin-left: 5vw;
+    width: 80%;
+    /* background-color: rgb(71, 230, 255); */
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+.b .asientos{
+    width: 100%;
+    height: 100%;
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1.5vw;
+}
+
+.asiento-normal{
+    width: 100%;
+    /* background-color: rgb(156, 225, 65); */
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}
+.c,
+.d,
+.e,
+.f {
+    width: 98%;
+    height: 20%;
+    /* background-color: rgb(71, 230, 255); */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.asientos{
+    width: 90%;
+    height: 70%;
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vw;
+}
+.reservado{
+    background-color: var(--color-lightgray);
+}
+
+.opciones {
+    height: 5%;
+    /* background-color: indianred; */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.opciones div {
+    width: 30%;
+    /* background-color: gainsboro; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.available div{
+    border-radius: 50%;
+    width: 3vw;
+    height: 1.8vh;
+    background-color: var(--color-darkslategray-100);
+}
+.reserved div{
+    border-radius: 50%;
+    width: 3vw;
+    height: 1.8vh;
+    background-color: var(--color-lightgray);
+}
+.select div{
+    border-radius: 50%;
+    width: 3vw;
+    height: 1.8vh;
+    background-color: var(--color-red);
+}
+.seleccionado{
+    background-color: var(--color-red);
+}
+
+.detalles{
+    margin-top: 3vh;
+    /* background-color: orchid; */
+    width: 100%;
+    height: 20vh;
+
+}
+.fechas{
+    width: 100%;
+    height: 50%;
+    /* background-color: palegoldenrod; */
+    display: flex;
+    justify-content: space-evenly;
+    overflow-x: auto;
+    gap: 5vw;
+}
+.fecha {
+    padding-left: 3vw;
+    padding-right: 3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    background-color: var(--color-whitesmoke);
+    border-radius: 3vw;
+}
+.detalles p{
+    width: 100%;
+    color: var(--color-darkgray-100);
+}
+.detalles h1{
+    width: 100%;
+    color: var(--color-darkslategray-100);
+}
+.precios {
+    margin-top: 2vh;
+    width: 100%;
+    height: 40%;
+    /* background-color: palegreen; */
+    display: flex;
+    justify-content: space-evenly;
+    overflow-x: auto;
+    gap: 5vw;
+}
+.precio {
+    padding-left: 1vw;
+    padding-right: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    background-color: var(--color-whitesmoke);
+    border-radius: 3vw;
+}
+
+.total {
+    height: 10vh;
+    width: 100%;
+    /* background-color: rgb(8, 99, 99); */
+    display: flex;
+    align-items: end;
+    justify-content: space-evenly;
+}
+.price {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.total a{
+    width: 60%;
+}
+.total button {
+    background-color: var(--color-red);
+    border: none;
+    width: 85%;
+    border-radius: 3vw;
+    height:7vh;
+    font-size: 4vw;
+}

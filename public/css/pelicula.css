@@ -108,7 +108,7 @@ body {
     color: var(--color-white);
 }
 .descripcion p{
-    font-size: 3.5vw;
+    font-size: 3vw;
 }
 
 
@@ -181,11 +181,12 @@ body {
     text-align: start;
 }
 .cinemas-container {
+    /* background-color: peru; */
     display: flex;
     width: 100%;
     align-items: center;
     flex-direction: column;
-    gap: var(--gap-3xs);
+    gap: 1vw;
     font-size: var(--font-size-smi);
     font-family: var(--font-poppins);
 }
