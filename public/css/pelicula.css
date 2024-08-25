@@ -1,0 +1,256 @@
+@import url(variables.css);
+
+*{
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    margin: 0;
+    line-height: normal;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-gray-200);
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-5xs);
+    color: var(--color-white);
+    font-family: var(--font-poppins);
+    flex-direction: column;
+}
+
+/* header */
+
+.header {
+    width: 100%;
+    padding-top: 1vh;
+    /* background: aquamarine; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.header .atras{
+    color: var(--color-white);
+    font-size: 10vw;
+    font-weight: bold;
+}
+.header h2{
+    font-size: 6vw;
+}
+
+.header .tres-puntos i{
+    color: var(--color-white);
+    font-size: 8vw;
+}
+
+/* Info pelicula  */
+
+.info-peli {
+    align-items: center;
+    display: flex;
+    padding: 0 var(--padding-6xl) 0 var(--padding-mid);
+    box-sizing: border-box;
+    width: 100%;
+    font-size: var(--font-size-xs);
+    flex-direction: column;
+    font-size: var(--font-size-mini);
+}
+
+.info-peli img {
+    border-radius: 2vw;
+    width: 100%;
+    height: 23vh;
+    object-fit: cover;
+}
+
+.box-principal {
+    display: flex;
+    margin: 2vw;
+    /* background-color: gainsboro; */
+    width: 100%;
+    justify-content:space-evenly;
+    gap: var(--gap-xl);
+}
+
+.box-principal2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.titulo {
+    font-size: 4.3vw;
+    font-family: "Inter";
+}
+.genero {
+    font-size: var(--font-size-3xs);
+    color: var(--blanco-transparente);
+}
+
+.watch-trailer {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-8xs) var(--padding-9xs);
+    background-color: var(--color-red);
+    width: 22vw;
+    height: 3vh;
+    border-radius: var(--br-8xs);
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.watch-trailer1 {
+    font-size: 2vw;
+    font-family: var(--font-poppins);
+    color: var(--color-white);
+}
+.descripcion p{
+    font-size: 3.5vw;
+}
+
+
+ /* Cast */
+
+ .cast-parent {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: var(--gap-mini);
+    height: 13vh;
+    justify-content: center;
+}
+.cast{
+    padding-left: 3vw;
+}
+.cast-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-8xs);
+    font-size: var(--font-size-5xs);
+    font-family: var(--font-poppins);
+}
+
+.cast-images {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-8xs);
+    flex-shrink: 0;
+}
+
+.cast-images-child {
+    height: 38px;
+    width: 38px;
+    position: relative;
+    border-radius: 50%;
+    object-fit: cover;
+}
+  .antonio-banderas,
+  .puss-in-boots1 {
+    font-size: 2.3vw;
+  }
+  .puss-in-boots1 {
+    color: var(--blanco-transparente);
+}
+  .names {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+
+/* cinema-parent */
+
+.cinema-parent {
+    /* background-color: magenta; */
+    height: 23vh;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    gap: var(--gap-mini);
+}
+.cinema-parent h1 {
+    width: 90%;
+    text-align: start;
+}
+.cinemas-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--gap-3xs);
+    font-size: var(--font-size-smi);
+    font-family: var(--font-poppins);
+}
+
+.Cinecampus {
+    width: 80%;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--color-red);
+    padding-left: 3vw;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-gray2-100);
+    padding-right: 3vw;
+}
+
+.texto p{
+    font-size: 3vw;
+    color: var(--blanco-transparente);
+}
+
+.Cinecampus-item {
+    height: 48px;
+    width: 48.3px;
+    border-radius: var(--br-8xs);
+    object-fit: cover;
+    z-index: 1;
+  }
+.neuplex{
+    width: 80%;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding-left: 3vw;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-gray2-100);
+    padding-right: 3vw;
+}
+
+/* book now */
+
+.book-now {
+    /* background-color: whitesmoke; */
+    display: flex;
+    height: 10vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-rojo{
+    border-radius: 2vw;
+    width: 85%;
+    height: 6vh;
+    background: var(--color-red);
+}
+.box-rojo button{
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-red);
+    border-radius: 2vw;
+    color: var(--color-white);
+    border: 0;
+}
+
+

@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, process.env.EXPRESS_STATIC, 'index.html'));
 })
 app.get('/servicio', (req, res) => {
-    res.sendFile(path.join(__dirname, process.env.EXPRESS_STATIC, 'views/user.html'));
+    res.sendFile(path.join(__dirname, process.env.EXPRESS_STATIC, 'views/pelicula.html'));
 })
 
 
