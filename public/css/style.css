@@ -409,9 +409,25 @@ body {
   min-width: 31px;
 }
 
+.header-trailer {
+  width: 100%;
+  display: flex;
+  height: 20vh;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.atras i{ 
+  font-size: 13vw;
+  color: var(--color-white);
+}
+.trailer {
+  width: 100%;
+  text-align: center;
+  color: var(--color-white);
+}
 .box-trailer{
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
