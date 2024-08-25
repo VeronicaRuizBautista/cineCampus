@@ -409,3 +409,13 @@ body {
   min-width: 31px;
 }
 
+.box-trailer{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box-trailer iframe {
+  width: 100%;
+}
