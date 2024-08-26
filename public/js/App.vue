@@ -1,0 +1,133 @@
+<template>
+  <div id="app">
+    <section class="home">
+      <section class="encabezado">
+        <div class="info-perfil">
+          <div class="datos">
+            <img class="foto-perfil" loading="lazy" alt="" src="../storage/img/fotoperfil.png" />
+            <div class="texto-saludo">
+              <h3 class="hi-nombre">Hi, <span>{{ nombreUsuario }}</span>!</h3>
+              <h3 class="lets-watch-movie">Let’s watch movie together!</h3>
+            </div>
+            <div class="box-campana">
+              <div class="campanita">
+                <i class='bx bx-bell' style='color:#ffffff'></i>
+              </div>
+            </div>
+          </div>
+          <div class="search">
+            <div class="search-inner">
+              <i class='bx bx-search-alt-2' style='color:#fffdfdb7'></i>
+            </div>
+            <input class="search-movie-cinema" placeholder="Search movie, cinema, genre..." type="text" />
+          </div>
+        </div>
+      </section>
+      <div class="titulo">
+        <h2 class="now-playing1">Now playing</h2>
+        <div class="see-all-movies">
+          <a href="#" class="see-all">See all</a>
+        </div>
+      </div>
+      <section class="movie-posters">
+        <div class="search-icon">
+          <div class="ejemplo-poster" v-for="pelicula in peliculas" :key="pelicula._id">
+            <div class="box-img">
+              <img class="poster1" :src="pelicula.img" alt="" loading="lazy" />
+            </div>
+            <div class="detalles-movie">
+              <h2 class="titulo-poster">{{ pelicula.titulo }}</h2>
+              <h1 class="genero-poster">{{ pelicula.genero.join(', ') }}</h1>
+            </div>
+          </div> 
+        </div>
+      </section>
+      <section class="Proximamente">
+        <div class="movie-actions">
+          <h2 class="coming-soon">Coming soon</h2>
+          <a href="#" class="see-all">See all</a>
+        </div>
+      </section>
+      <section class="recommended-movies">
+        <div class="cart" v-for="(item, index) in recommendedMovies" :key="index">
+          <div class="cart-item">
+            <img alt="" :src="item.imgSrc" />
+          </div>
+          <div class="recommendation-details">
+            <div class="recommendation-title">
+              <div class="furious-10-2023">{{ item.title }}</div>
+              <div class="action-adventure">{{ item.genre }}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <footer class="rectangle-parent">
+      <div class="tabs-content-parent">
+        <div class="tabs-content">
+          <div class="home-tab">
+            <a class="icon-footer" href="#"><i class='bx bxs-home' style='color:#fe0000'></i></a>
+            <a class="icon-footer" href="#"><i class='bx bx-search-alt-2' style='color:#fffdfdb7'></i></a>
+            <a class="icon-footer" href="#"><i class='bx bx-film' style='color:#fffdfdb7'></i></a>
+            <a class="icon-footer" href="#"><i class='bx bx-user' style='color:#fffdfdb7'></i></a>
+          </div>
+        </div>
+        <div class="navigation-labels">
+          <div class="home1">Home</div>
+          <div class="browse">Browse</div>
+          <div class="tickets">Tickets</div>
+          <div class="profile">Profile</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</template>
+
+<script>
+import apis from './api.js'
+export default {
+  data() {
+    return {
+      nombreUsuario: 'Ferrucio Tuccine',
+      peliculas: [],
+      recommendedMovies: [
+        { title: 'Furious 10 (2023)', genre: 'Action, Adventure', imgSrc: 'storage/img/miniatura.png' },
+        // Agrega más recomendaciones si es necesario
+      ]
+    };
+  },
+  mounted() {
+    this.obtenerNombreUsuario();
+    this.obtenerPeliculas();
+  },
+  methods: {
+    async obtenerNombreUsuario() {
+      try {
+        const response = await apis.getUsername();
+        console.log(response)
+        const data = await response.json();
+        console.log(data)
+        this.nombreUsuario = data; // Actualizar el nombre del usuario
+      } catch (error) {
+        console.error("Error al obtener el nombre del usuario", error);
+      }
+    },
+    async obtenerPeliculas() {
+      try {
+        const response =await apis.getAllPeliculas();
+        const data = await response.json();
+        this.peliculas = data.data; // Actualizar el array de películas
+      } catch (error) {
+        console.error("Error al obtener las películas", error);
+      }
+    }
+  }
+};
+</script>
+
+<style scoped>
+@import '../css/style.css';
+</style>
+
+
+

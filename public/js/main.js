@@ -1,3 +1,7 @@
+import { createApp } from 'vue';
+import App from './App.vue';
+
+createApp(App).mount('#app');  
 // new Vue({
 //     el: '#nombre',
 //     data: {
@@ -18,24 +22,24 @@
 //         }
 //     }
 // });
-new Vue({
-    el: '#peliculas-app',
-    data: {
-        peliculas: [] // Inicialmente vacío, se llenará con los datos obtenidos
-    },
-    mounted() {
-        this.obtenerPeliculas(); // Llamar a la función para obtener las películas al montar el componente
-    },
-    methods: {
-        async obtenerPeliculas() {
-            try {
-                const response = await fetch('/pelicula/v1?fechayhora=2024-06-20T14:00:00.000Z');
-                const data = await response.json();
-                console.log(data.data)
-                this.peliculas = data.data; // Actualizar el array de películas
-            } catch (error) {
-                console.error("Error al obtener las películas", error);
-            }
-        }
-    }
-});
+// new Vue({
+//     el: '#peliculas-app',
+//     data: {
+//         peliculas: [] // Inicialmente vacío, se llenará con los datos obtenidos
+//     },
+//     mounted() {
+//         this.obtenerPeliculas(); // Llamar a la función para obtener las películas al montar el componente
+//     },
+//     methods: {
+//         async obtenerPeliculas() {
+//             try {
+//                 const response = await fetch('/pelicula/v1?fechayhora=2024-06-20T14:00:00.000Z');
+//                 const data = await response.json();
+//                 console.log(data.data)
+//                 this.peliculas = data.data; // Actualizar el array de películas
+//             } catch (error) {
+//                 console.error("Error al obtener las películas", error);
+//             }
+//         }
+//     }
+// });

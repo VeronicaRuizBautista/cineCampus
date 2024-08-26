@@ -10,96 +10,12 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" />
-        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-        <script src="js/main.js" defer></script>
+        <script type="module" src="js/main.js" defer></script>
     </head>
-    <body id="app">
-        <section class="home">
-            <section class="encabezado">
-                <div class="info-perfil">
-                    <div class="datos">
-                        <img class="foto-perfil" loading="lazy" alt="" src="storage/img/fotoperfil.png" />
-                        <div class="texto-saludo" >
-                            <h3 class="hi-nombre">Hi, <span id="nombre">{{ nombreUsuario }}</span>!</h3>
-                            <h3 class="lets-watch-movie">Let’s watch movie together!</h3>
-                        </div>
-                        <div class="box-campana">
-                            <div class="campanita">
-                                <i class='bx bx-bell' style='color:#ffffff'  ></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="search">
-                        <div class="search-inner">
-                            <i class='bx bx-search-alt-2' style='color:#fffdfdb7'></i>
-                        </div>
-                        <input class="search-movie-cinema" placeholder="Search movie, cinema, genre..." type="text" />
-                    </div>
-                </div>
-            </section>
-            <div class="titulo">
-                <h2 class="now-playing1">Now playing</h2>
-                <div class="see-all-movies">
-                  <a href="#" class="see-all">See all</a>
-                </div>
-            </div>
-            <section class="movie-posters">
-                <div class="search-icon" id="peliculas-app">
-                  <div class="ejemplo-poster" v-for="pelicula in peliculas" :key="pelicula._id">
-                    <div class="box-img">
-                        <img class="poster1" :src="pelicula.img" alt="" loading="lazy" />
-                    </div>
-                    <div class="detalles-movie">
-                        <h2 class="titulo-poster">{{ pelicula.titulo }}</h2>
-                        <h1 class="genero-poster">{{ pelicula.genero.join(', ') }}</h1>
-                    </div>
-                  </div> 
-                </div>
-            </section>
-            <section class="Proximamente">
-                <div class="movie-actions">
-                  <h2 class="coming-soon">Coming soon</h2>
-                  <a href="#"class="see-all">See all</a>
-                </div>
-            </section>
-            <section class="recommended-movies">
-                    <div class="cart">
-                        <div class="cart-item">
-                            <img class="" alt="" src="storage/img/miniatura.png" />
-                        </div>
-                        <div class="recommendation-details">
-                            <div class="recommendation-title">
-                                <div class="furious-10-2023">Furious 10 (2023)</div>
-                                <div class="action-adventure">Action, Adventure</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart-item">
-                            <img class="" alt="" src="storage/img/miniatura.png" />
-                        </div>
-                        <div class="recommendation-details">
-                            <div class="recommendation-title">
-                                <div class="furious-10-2023">Furious 10 (2023)</div>
-                                <div class="action-adventure">Action, Adventure</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart-item">
-                            <img class="" alt="" src="storage/img/miniatura.png" />
-                        </div>
-                        <div class="recommendation-details">
-                            <div class="recommendation-title">
-                                <div class="furious-10-2023">Furious 10 (2023)</div>
-                                <div class="action-adventure">Action, Adventure</div>
-                            </div>
-                        </div>
-                    </div>
-            </section>
-        </section>
+    <body>
+        <div id="app"></div>
     </body>
-    <footer class="rectangle-parent">
+    <!-- <footer class="rectangle-parent">
         <div class="tabs-content-parent">
             <div class="tabs-content">
                 <div class="home-tab">
@@ -116,5 +32,5 @@
                 <div class="profile">Profile</div>
             </div>
         </div>
-    </footer>
+    </footer> -->
 </html>
