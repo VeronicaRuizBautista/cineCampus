@@ -275,6 +275,13 @@ body {
   min-width: 45px;
 }
 
+
+
+/* .recommended-movies .cart { */
+
+  /* transition: transform 0.5s ease-in-out; */
+
+
 .recommended-movies{
   /* background-color: aqua; */
   height: 27vh;
@@ -286,18 +293,25 @@ body {
   text-align: left;
   color: var(--color-white);
   width: 100%;
-  font-size: 16px;
   font-family: var(--font-poppins);
+
 }
 .cart:first-of-type {
-  margin-top: 17vh; 
+  margin-top: 16vh; 
+}
+.cart:last-of-type {
+  margin-bottom: 12vh;
 }
 
 .cart,
 .recommendation-details,
 .recommendation-title {
+  width: 50vw;
+  /* background: honeydew; */
   display: flex;
   flex-direction: column;
+  height: 70%;
+  
 }
 .cart {
   margin-top: 8px;
@@ -309,22 +323,28 @@ body {
   gap: 18px;
   width: 85%;
   z-index: 1;
+  height: 10vh;
 }
 
-.cart-item {
+
+.cart-item img {
   /* background-color: yellow; */
   position: relative;
   border-radius: var(--br-xl);
-  height: 80px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
   object-fit: cover;
 }
 .action-adventure,
 .furious-10-2023 {
+  /* background-color: darkcyan; */
   position: relative;
-  line-height: 120%;
-  font-weight: 500;
+  font-family: var(--font-poppins);
+  width: 100%;
+  font-size: 3.5vw;
   white-space: nowrap;
+  overflow: hidden; /* Oculta el desbordamiento del texto */
+  text-overflow: ellipsis; /* Agrega "..." al final si el texto es demasiado largo */
 }
 .action-adventure {
   font-size: 12px;

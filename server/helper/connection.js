@@ -7,7 +7,6 @@ module.exports = class connect {
     #host;
     #cluster;
     #dbName;
-    static instance;
     conexion;
 
     constructor({ user: u, port: p, pass: w, host: h, cluster: c, dbName: d } = {
@@ -18,9 +17,6 @@ module.exports = class connect {
         cluster: process.env.MONGO_CLUSTER,
         dbName: process.env.MONGO_DB
     }) {
-        if (typeof connect.instance == "object") {
-            return connect.instance;
-        }
         this.user = u;
         this.port = p;
         this.setPass = w;
@@ -30,8 +26,6 @@ module.exports = class connect {
         this.#open().then(() => {
             this.db = this.conexion.db(this.getdbName);
         });
-        connect.instance = this;
-        return this;
     }
 
     set setPass(pass) {

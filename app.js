@@ -4,7 +4,7 @@ const app = express();
 const router = require('./server/router')
 const cors = require("cors")
 
-app.use("cors")
+app.use(cors())
 
 app.use(express.json());
 

@@ -32,7 +32,7 @@
       <section class="movie-posters">
         <div class="search-icon">
           <div class="ejemplo-poster" v-for="pelicula in peliculas" :key="pelicula._id">
-            <div class="box-img">
+            <div class="box-img" @click="redirectToPelicula(pelicula.titulo)">
               <img class="poster1" :src="pelicula.img" alt="" loading="lazy" />
             </div>
             <div class="detalles-movie">
@@ -48,19 +48,19 @@
           <a href="#" class="see-all">See all</a>
         </div>
       </section>
-      <section class="recommended-movies">
-        <div class="cart" v-for="(item, index) in recommendedMovies" :key="index">
-          <div class="cart-item">
-            <img alt="" :src="item.imgSrc" />
-          </div>
-          <div class="recommendation-details">
-            <div class="recommendation-title">
-              <div class="furious-10-2023">{{ item.title }}</div>
-              <div class="action-adventure">{{ item.genre }}</div>
+        <section class="recommended-movies">
+          <div class="cart" v-for="pelicula in recommendedMovies" :key="pelicula._id">
+            <div class="cart-item">
+              <img :alt="pelicula.titulo" :src="pelicula.img" />
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-title">
+                <div class="furious-10-2023">{{ pelicula.titulo }}</div>
+                <div class="action-adventure">{{ pelicula.genero.join(', ') }}</div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
     </section>
     <footer class="rectangle-parent">
       <div class="tabs-content-parent">
@@ -92,22 +92,21 @@ export default {
       peliculas: [],
       recommendedMovies: [
         { title: 'Furious 10 (2023)', genre: 'Action, Adventure', imgSrc: 'storage/img/miniatura.png' },
-        // Agrega más recomendaciones si es necesario
       ]
     };
   },
   mounted() {
     this.obtenerNombreUsuario();
     this.obtenerPeliculas();
+    this.comingSoon();
+    this.redirectToPelicula();
   },
   methods: {
     async obtenerNombreUsuario() {
       try {
         const response = await apis.getUsername();
-        console.log(response)
-        const data = await response.json();
-        console.log(data)
-        this.nombreUsuario = data; // Actualizar el nombre del usuario
+        const nombre = response.data
+        this.nombreUsuario = nombre; // Actualizar el nombre del usuario
       } catch (error) {
         console.error("Error al obtener el nombre del usuario", error);
       }
@@ -115,14 +114,28 @@ export default {
     async obtenerPeliculas() {
       try {
         const response =await apis.getAllPeliculas();
-        const data = await response.json();
-        this.peliculas = data.data; // Actualizar el array de películas
+        const peli = response.data.data
+        this.peliculas = peli; // Actualizar el array de películas
       } catch (error) {
         console.error("Error al obtener las películas", error);
       }
-    }
+    },
+    async comingSoon() {
+      try {
+        const response = await apis.commingSoonPeliculas();
+        const soon = response.data.data
+        this.recommendedMovies = soon; // Actualizar el array de películas
+      } catch (error) {
+        console.error("Error al obtener las películas", error);
+      }
+    },
+    async redirectToPelicula(titulo) {
+      // Redireccionar a la página de detalles de la película con el ID en la URL
+      this.$router.push({ name: 'pelicula', params: { titulo } });
+    },
   }
 };
+
 </script>
 
 <style scoped>
