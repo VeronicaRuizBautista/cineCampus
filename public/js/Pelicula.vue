@@ -88,7 +88,6 @@ export default {
       sinopsis: '',
       reparto: [],
       horarioProyeccion: [],
-      trailer: '',  // Agrega la URL del tráiler aquí
     });
 
     const fetchPeliculaData = async () => {
