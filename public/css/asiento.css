@@ -96,17 +96,20 @@ main{
   }
   
 .asiento-no-disponible {
-    background-color: var(--color-lightgray); /* o cualquier color o estilo que desees */
+    background-color: var(--color-lightgray);
 }
-.asientos div p{
+.asientos p {
     display: none;
-}
-.asientos div:hover {
-    background-color: var(--color-red);
-}
-.asientos div:hover p {
+  }
+  .asiento-seleccionado {
+    background-color: var(--color-red); 
+  }
+  
+  .asiento-seleccionado p {
     display: block;
-}
+  }
+  
+
 .b{
     margin-left: 5vw;
     width: 80%;

@@ -12,99 +12,161 @@
     </header>
     <main>
         <section class="asiento-vip">
-        <div class="a">
-          <div class="letra">
-            <p>A</p>
+      <div class="a">
+        <div class="letra">
+          <p>A</p>
+        </div>
+        <div class="asientos">
+          <div :class="getSeatClass('A1')" @click="toggleSeatSelection('A1')">
+            <p v-if="selectedSeat === 'A1'">1</p>
           </div>
-          <div class="asientos">
-            <div :class="getSeatClass('A1')"><p>1</p></div>
-            <div :class="getSeatClass('A2')"><p>2</p></div>
-            <div :class="getSeatClass('A3')"><p>3</p></div>
-            <div :class="getSeatClass('A4')"><p>4</p></div>
-            <div :class="getSeatClass('A5')"><p>5</p></div>
+          <div :class="getSeatClass('A2')" @click="toggleSeatSelection('A2')">
+            <p v-if="selectedSeat === 'A2'">2</p>
+          </div>
+          <div :class="getSeatClass('A3')" @click="toggleSeatSelection('A3')">
+            <p v-if="selectedSeat === 'A3'">3</p>
+          </div>
+          <div :class="getSeatClass('A4')" @click="toggleSeatSelection('A4')">
+            <p v-if="selectedSeat === 'A4'">4</p>
+          </div>
+          <div :class="getSeatClass('A5')" @click="toggleSeatSelection('A5')">
+            <p v-if="selectedSeat === 'A5'">5</p>
           </div>
         </div>
-        <div class="b">
-          <div class="letra">
-            <p>B</p>
+      </div>
+      <div class="b">
+        <div class="letra">
+          <p>B</p>
+        </div>
+        <div class="asientos">
+          <div :class="getSeatClass('B1')" @click="toggleSeatSelection('B1')">
+            <p v-if="selectedSeat === 'B1'">1</p>
           </div>
-          <div class="asientos">
-            <div :class="getSeatClass('B1')"><p>1</p></div>
-            <div :class="getSeatClass('B2')"><p>2</p></div>
-            <div :class="getSeatClass('B3')"><p>3</p></div>
-            <div :class="getSeatClass('B4')"><p>4</p></div>
-            <div :class="getSeatClass('B5')"><p>5</p></div>
-            <div :class="getSeatClass('B6')"><p>6</p></div>
-            <div :class="getSeatClass('B7')"><p>7</p></div>
+          <div :class="getSeatClass('B2')" @click="toggleSeatSelection('B2')">
+            <p v-if="selectedSeat === 'B2'">2</p>
+          </div>
+          <div :class="getSeatClass('B3')" @click="toggleSeatSelection('B3')">
+            <p v-if="selectedSeat === 'B3'">3</p>
+          </div>
+          <div :class="getSeatClass('B4')" @click="toggleSeatSelection('B4')">
+            <p v-if="selectedSeat === 'B4'">4</p>
+          </div>
+          <div :class="getSeatClass('B5')" @click="toggleSeatSelection('B5')">
+            <p v-if="selectedSeat === 'B5'">5</p>
+          </div>
+          <div :class="getSeatClass('B6')" @click="toggleSeatSelection('B6')">
+            <p v-if="selectedSeat === 'B6'">6</p>
+          </div>
+          <div :class="getSeatClass('B7')" @click="toggleSeatSelection('B7')">
+            <p v-if="selectedSeat === 'B7'">7</p>
           </div>
         </div>
-      </section>
-      <section class="asiento-normal">
-        <div class="c">
-          <div class="letra">
-            <p>C</p>
+      </div>
+    </section>
+    <section class="asiento-normal">
+      <div class="c">
+        <div class="letra">
+          <p>C</p>
+        </div>
+        <div class="asientos">
+          <div :class="getSeatClass('C1')" @click="toggleSeatSelection('C1')">
+            <p v-if="selectedSeat === 'C1'">1</p>
           </div>
-          <div class="asientos">
-            <div :class="getSeatClass('C1')"><p>1</p></div>
-            <div :class="getSeatClass('C2')"><p>2</p></div>
-            <div :class="getSeatClass('C3')"><p>3</p></div>
-            <div :class="getSeatClass('C4')"><p>4</p></div>
-            <div :class="getSeatClass('C5')"><p>5</p></div>
-            <div :class="getSeatClass('C6')"><p>6</p></div>
-            <div :class="getSeatClass('C7')"><p>7</p></div>
-            <div :class="getSeatClass('C8')"><p>8</p></div>
-            <div :class="getSeatClass('C9')"><p>9</p></div>
+          <div :class="getSeatClass('C2')" @click="toggleSeatSelection('C2')">
+            <p v-if="selectedSeat === 'C2'">2</p>
+          </div>
+          <div :class="getSeatClass('C3')" @click="toggleSeatSelection('C3')">
+            <p v-if="selectedSeat === 'C3'">3</p>
+          </div>
+          <div :class="getSeatClass('C4')" @click="toggleSeatSelection('C4')">
+            <p v-if="selectedSeat === 'C4'">4</p>
+          </div>
+          <div :class="getSeatClass('C5')" @click="toggleSeatSelection('C5')">
+            <p v-if="selectedSeat === 'C5'">5</p>
+          </div>
+          <div :class="getSeatClass('C6')" @click="toggleSeatSelection('C6')">
+            <p v-if="selectedSeat === 'C6'">6</p>
+          </div>
+          <div :class="getSeatClass('C7')" @click="toggleSeatSelection('C7')">
+            <p v-if="selectedSeat === 'C7'">7</p>
+          </div>
+          <div :class="getSeatClass('C8')" @click="toggleSeatSelection('C8')">
+            <p v-if="selectedSeat === 'C8'">8</p>
+          </div>
+          <div :class="getSeatClass('C9')" @click="toggleSeatSelection('C9')">
+            <p v-if="selectedSeat === 'C9'">9</p>
           </div>
         </div>
-        <div class="d">
-          <div class="letra">
-            <p>D</p>
+      </div>
+      <div class="d">
+        <div class="letra">
+          <p>D</p>
+        </div>
+        <div class="asientos">
+          <div :class="getSeatClass('D1')" @click="toggleSeatSelection('D1')">
+            <p v-if="selectedSeat === 'D1'">1</p>
           </div>
-          <div class="asientos">
-            <div :class="getSeatClass('D1')"><p>1</p></div>
-            <div :class="getSeatClass('D2')"><p>2</p></div>
-            <div :class="getSeatClass('D3')"><p>3</p></div>
-            <div :class="getSeatClass('D4')"><p>4</p></div>
-            <div :class="getSeatClass('D5')"><p>5</p></div>
-            <div :class="getSeatClass('D6')"><p>6</p></div>
-            <div :class="getSeatClass('D7')"><p>7</p></div>
-            <div :class="getSeatClass('D8')"><p>8</p></div>
-            <div :class="getSeatClass('D9')"><p>9</p></div>
+          <div :class="getSeatClass('D2')" @click="toggleSeatSelection('D2')">
+            <p v-if="selectedSeat === 'D2'">2</p>
+          </div>
+          <div :class="getSeatClass('D3')" @click="toggleSeatSelection('D3')">
+            <p v-if="selectedSeat === 'D3'">3</p>
+          </div>
+          <div :class="getSeatClass('D4')" @click="toggleSeatSelection('D4')">
+            <p v-if="selectedSeat === 'D4'">4</p>
+          </div>
+          <div :class="getSeatClass('D5')" @click="toggleSeatSelection('D5')">
+            <p v-if="selectedSeat === 'D5'">5</p>
+          </div>
+          <div :class="getSeatClass('D6')" @click="toggleSeatSelection('D6')">
+            <p v-if="selectedSeat === 'D6'">6</p>
+          </div>
+          <div :class="getSeatClass('D7')" @click="toggleSeatSelection('D7')">
+            <p v-if="selectedSeat === 'D7'">7</p>
+          </div>
+          <div :class="getSeatClass('D8')" @click="toggleSeatSelection('D8')">
+            <p v-if="selectedSeat === 'D8'">8</p>
+          </div>
+          <div :class="getSeatClass('D9')" @click="toggleSeatSelection('D9')">
+            <p v-if="selectedSeat === 'D9'">9</p>
           </div>
         </div>
-        <div class="e">
-          <div class="letra">
-            <p>E</p>
+      </div>
+      <div class="e">
+        <div class="letra">
+          <p>E</p>
+        </div>
+        <div class="asientos">
+          <div :class="getSeatClass('E1')" @click="toggleSeatSelection('E1')">
+            <p v-if="selectedSeat === 'E1'">1</p>
           </div>
-          <div class="asientos">
-            <div :class="getSeatClass('E1')"><p>1</p></div>
-            <div :class="getSeatClass('E2')"><p>2</p></div>
-            <div :class="getSeatClass('E3')"><p>3</p></div>
-            <div :class="getSeatClass('E4')"><p>4</p></div>
-            <div :class="getSeatClass('E5')"><p>5</p></div>
-            <div :class="getSeatClass('E6')"><p>6</p></div>
-            <div :class="getSeatClass('E7')"><p>7</p></div>
-            <div :class="getSeatClass('E8')"><p>8</p></div>
-            <div :class="getSeatClass('E9')"><p>9</p></div>
+          <div :class="getSeatClass('E2')" @click="toggleSeatSelection('E2')">
+            <p v-if="selectedSeat === 'E2'">2</p>
+          </div>
+          <div :class="getSeatClass('E3')" @click="toggleSeatSelection('E3')">
+            <p v-if="selectedSeat === 'E3'">3</p>
+          </div>
+          <div :class="getSeatClass('E4')" @click="toggleSeatSelection('E4')">
+            <p v-if="selectedSeat === 'E4'">4</p>
+          </div>
+          <div :class="getSeatClass('E5')" @click="toggleSeatSelection('E5')">
+            <p v-if="selectedSeat === 'E5'">5</p>
+          </div>
+          <div :class="getSeatClass('E6')" @click="toggleSeatSelection('E6')">
+            <p v-if="selectedSeat === 'E6'">6</p>
+          </div>
+          <div :class="getSeatClass('E7')" @click="toggleSeatSelection('E7')">
+            <p v-if="selectedSeat === 'E7'">7</p>
+          </div>
+          <div :class="getSeatClass('E8')" @click="toggleSeatSelection('E8')">
+            <p v-if="selectedSeat === 'E8'">8</p>
+          </div>
+          <div :class="getSeatClass('E9')" @click="toggleSeatSelection('E9')">
+            <p v-if="selectedSeat === 'E9'">9</p>
           </div>
         </div>
-        <div class="f">
-          <div class="letra">
-            <p>F</p>
-          </div>
-          <div class="asientos">
-            <div :class="getSeatClass('F1')"><p>1</p></div>
-            <div :class="getSeatClass('F2')"><p>2</p></div>
-            <div :class="getSeatClass('F3')"><p>3</p></div>
-            <div :class="getSeatClass('F4')"><p>4</p></div>
-            <div :class="getSeatClass('F5')"><p>5</p></div>
-            <div :class="getSeatClass('F6')"><p>6</p></div>
-            <div :class="getSeatClass('F7')"><p>7</p></div>
-            <div :class="getSeatClass('F8')"><p>8</p></div>
-            <div :class="getSeatClass('F9')"><p>9</p></div>
-          </div>
-        </div>
-      </section>
+      </div>
+    </section>
         <div class="opciones">
             <div class="available">
                 <div></div>
@@ -196,6 +258,7 @@ export default {
     setup() {
     const route = useRouter();
     const asientos = ref([]);
+    const selectedSeat = ref(null);
     const dates = ref([
       { day: 'Fri', date: '17' },
       { day: 'Sat', date: '18' },
@@ -226,10 +289,22 @@ export default {
 
     const getSeatClass = (seat) => {
       const foundSeat = asientos.value.find(a => a.asiento == seat);
+      if (seat === selectedSeat.value) {
+            return 'asiento-seleccionado';
+      }
       if (foundSeat) {
         return 'asiento-reservado';
       }else{
         return 'asiento-no-disponible';
+      }
+    };
+    const toggleSeatSelection = (seat) => {
+        console.log(seat)
+      // Solo cambiar la selección si el asiento no está actualmente seleccionado
+      if (selectedSeat.value !== seat) {
+        selectedSeat.value = seat;
+      } else {
+        selectedSeat.value = null; // Deseleccionar si se vuelve a hacer clic
       }
     };
 
@@ -245,7 +320,9 @@ export default {
       dates,
       prices,
       getSeatClass,
-      goBack
+      goBack,
+      selectedSeat,
+      toggleSeatSelection,
     };
   }
 };
