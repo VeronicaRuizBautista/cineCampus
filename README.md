@@ -21,6 +21,22 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     EXPRESS_HOST="localhost"
 
     `mongodb://anaT:12345678@172.16.102.13:27017/cinecampus`
+
+
+        //con railway
+    MONGO_USER="anaT"
+    MONGO_PORT=49839
+    MONGO_PWD="12345678"
+    MONGO_HOST="mongodb://"
+    MONGO_CLUSTER="utorack.proxy.rlwy.net"
+    MONGO_DB="cinecampus"
+
+    EXPRESS_STATIC="public"
+    EXPRESS_PORT=5012
+    EXPRESS_HOST="localhost"
+
+
+    'mongodb://mongo:FhMsVSTWFqHHktcYhQhaErcJTYPWcCbL@autorack.proxy.rlwy.net:49839'
 ```
 
 ### **Requisitos Funcionales**

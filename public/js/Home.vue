@@ -1,5 +1,6 @@
 <template>
-    <section class="home">
+    <body>
+      <section class="home">
       <section class="encabezado">
         <div class="info-perfil">
           <div class="datos">
@@ -32,7 +33,7 @@
         <div class="search-icon">
           <div class="ejemplo-poster" v-for="pelicula in peliculas" :key="pelicula._id">
             <div class="box-img" @click="redirectToPelicula(pelicula.titulo)">
-              <img class="poster1" :src="pelicula.img" alt="" loading="lazy" />
+              <img class="poster1" :src="pelicula.img" alt="" loading="lazy"/>
             </div>
             <div class="detalles-movie">
               <h2 class="titulo-poster">{{ pelicula.titulo }}</h2>
@@ -60,25 +61,26 @@
             </div>
           </div>
         </section>
-    </section>
-    <footer class="rectangle-parent">
-        <div class="tabs-content-parent">
-        <div class="tabs-content">
-            <div class="home-tab">
-            <a class="icon-footer" href="#"><i class='bx bxs-home' style='color:#fe0000'></i></a>
-            <a class="icon-footer" href="#"><i class='bx bx-search-alt-2' style='color:#fffdfdb7'></i></a>
-            <a class="icon-footer" href="#"><i class='bx bx-film' style='color:#fffdfdb7'></i></a>
-            <a class="icon-footer" href="#"><i class='bx bx-user' style='color:#fffdfdb7'></i></a>
-            </div>
-        </div>
-        <div class="navigation-labels">
-            <div class="home1">Home</div>
-            <div class="browse">Browse</div>
-            <div class="tickets">Tickets</div>
-            <div class="profile">Profile</div>
-        </div>
-        </div>
-    </footer>
+      </section>
+      <footer class="rectangle-parent">
+          <div class="tabs-content-parent">
+          <div class="tabs-content">
+              <div class="home-tab">
+              <a class="icon-footer" href="#"><i class='bx bxs-home' style='color:#fe0000'></i></a>
+              <a class="icon-footer" href="#"><i class='bx bx-search-alt-2' style='color:#fffdfdb7'></i></a>
+              <a class="icon-footer" href="#"><i class='bx bx-film' style='color:#fffdfdb7'></i></a>
+              <a class="icon-footer" href="#"><i class='bx bx-user' style='color:#fffdfdb7'></i></a>
+              </div>
+          </div>
+          <div class="navigation-labels">
+              <div class="home1">Home</div>
+              <div class="browse">Browse</div>
+              <div class="tickets">Tickets</div>
+              <div class="profile">Profile</div>
+          </div>
+          </div>
+      </footer>
+    </body>
 </template>
 
 <script>
@@ -103,9 +105,9 @@ export default {
     this.obtenerNombreUsuario();
     this.obtenerPeliculas();
     this.comingSoon();
-    this.redirectToPelicula();
   },
   methods: {
+    
     async obtenerNombreUsuario() {
       try {
         const response = await apis.getUsername();
@@ -135,7 +137,7 @@ export default {
     },
     async redirectToPelicula(titulo) {
       // Redireccionar a la página de detalles de la película con el ID en la URL
-      this.$router.push({ name: 'pelicula', params: { titulo } });
+      router.push({ name: 'pelicula', params: { titulo } });
     },
   }
 };
