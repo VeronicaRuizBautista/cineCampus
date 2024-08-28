@@ -93,6 +93,7 @@ export default {
     const fetchPeliculaData = async () => {
       try {
         const titulo = route.currentRoute.value.params
+        sessionStorage.setItem('key', titulo.titulo);
         const response = await apis.getPeliculaByTittle(titulo.titulo); 
         const result = response.data.data[0]
         pelicula.value = result;  

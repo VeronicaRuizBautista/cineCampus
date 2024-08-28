@@ -169,15 +169,19 @@ body {
   display: flex;
   height: 45vh;
   box-sizing: border-box;
+  padding-left: 2vw;
+  padding-right: 2vw;
 }
 
 .search-icon {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   /* background-color: olive; */
   height: 100%;
   overflow-x: auto;
+  box-sizing: border-box;
   width: 100%;
+  gap: 5vw;
 }
 
 .ejemplo-poster {
@@ -185,19 +189,11 @@ body {
 
   flex-direction: column;
   /* background-color: #b83f3f; */
-  margin-left: 5vw;
   border-radius: var(--br-xl);
   width: 50%;
   /* object-fit: cover; */
 }
-/* .ejemplo-poster:first-of-type { */
-  /* background-color: #b83f3f; */
-  /* margin-left: 450vw;
-} */
-.ejemplo-poster:last-of-type {
-  /* background-color: #b83f3f; */
-  margin-right: 5vw;
-}
+
 .box-img{
     width: 40vw;
   height: 30vh;
@@ -285,28 +281,28 @@ body {
   /* transition: transform 0.5s ease-in-out; */
 
 
-.recommended-movies{
-  /* background-color: aqua; */
-  height: 27vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: left;
-  color: var(--color-white);
-  width: 100%;
-  font-family: var(--font-poppins);
-
-}
-.cart:first-of-type {
+  .recommended-movies {
+    height: 30vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Asegura que los elementos comiencen desde la parte superior */
+    align-items: center;
+    text-align: left;
+    color: var(--color-white);
+    width: 100%;
+    font-family: var(--font-poppins);
+    padding: 0; /* Asegúrate de que no haya padding innecesario */
+    box-sizing: border-box; /* Asegura que padding y borde no causen problemas de tamaño */
+    padding-bottom: 15vh;
+  }
+/* .cart:first-of-type {
   margin-top: 16vh; 
 }
 .cart:last-of-type {
   margin-bottom: 12vh;
-}
+} */
 
-.cart,
 .recommendation-details,
 .recommendation-title {
   width: 50vw;
@@ -317,16 +313,17 @@ body {
   
 }
 .cart {
+  display: flex;
+  flex-direction: row;
   margin-top: 8px;
   border-radius: var(--br-xl);
   background: linear-gradient(90deg, #272727, #272727);
-  flex-direction: row;
   padding: 9px var(--padding-3xs);
   box-sizing: border-box;
   gap: 18px;
   width: 85%;
-  z-index: 1;
   height: 10vh;
+  position: relative; /* Asegura que los elementos hijos se posicionen correctamente */
 }
 
 

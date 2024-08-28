@@ -58,7 +58,7 @@ body {
     font-size: var(--font-size-mini);
 }
 
-.info-peli img {
+.info-peli img{
     border-radius: 2vw;
     width: 100%;
     height: 23vh;

@@ -124,6 +124,7 @@ class Pelicula extends connect{
                         duracion: 1,
                         sinopsis: 1,
                         reparto: 1,
+                        img: 1,
                         trailer: 1,
                         horarioProyeccion: {
                           _id: 1,

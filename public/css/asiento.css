@@ -208,9 +208,10 @@ main{
 .fechas{
     width: 100%;
     height: 50%;
+    box-sizing: border-box;
     /* background-color: palegoldenrod; */
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     overflow-x: auto;
     gap: 5vw;
 }
@@ -224,6 +225,10 @@ main{
     height: 100%;
     background-color: var(--color-whitesmoke);
     border-radius: 3vw;
+}
+.fecha:first-of-type {
+    background-color: var(--color-red);
+    color: var(--color-white);
 }
 .detalles p{
     width: 100%;

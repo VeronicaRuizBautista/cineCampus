@@ -182,47 +182,23 @@
             </div>
         </div>
     </main>
-    <section class="detalles">
+      <section class="detalles" v-if="pelicula.horarioProyeccion">
         <div class="fechas">
-            <div class="fecha">
-                <p>Fri</p>
-                <h1>17</h1>
-            </div>
-            <div class="fecha">
-                <p>Sat</p>
-                <h1>18</h1>
-            </div>
-            <div class="fecha">
-                <p>Sun</p>
-                <h1>19</h1>
-            </div>
-            <div class="fecha">
-                <p>Mon</p>
-                <h1>20</h1>
-            </div>
-            <div class="fecha">
-                <p>Tue</p>
-                <h1>21</h1>
-            </div>
-            <div class="fecha">
-                <p>Wed</p>
-                <h1>21</h1>
-            </div>
-            <div class="fecha">
-                <p>Thur</p>
-                <h1>21</h1>
-            </div>
+          <div class="fecha" v-for="(horario, index) in pelicula.horarioProyeccion" :key="index">
+            <p>{{ new Date(horario.fechaInicio).toLocaleDateString('en-US', { weekday: 'short' }) }}</p>
+            <h1>{{ new Date(horario.fechaInicio).getDate() }}</h1>
+          </div>
         </div>
         <div class="precios">
-            <div class="precio">
-                <h1>13:00</h1>
-                <p>$ {{ Asiento.precio }} 3D</p>
-            </div>
+          <div class="precio" v-for="(horario, index) in pelicula.horarioProyeccion" :key="index">
+            <h1>{{ new Date(horario.fechaInicio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</h1>
+            <p>{{ selectedPrice ? `$${selectedPrice}` : '' }} 3D</p>
+          </div>
         </div>
-    </section>
+      </section>
     <section class="total">
         <div class="price">
-            <h1>Price</h1>
+            <h1>hora</h1>
             <p>${{ selectedPrice }}</p>
         </div>
         <a href="#" @click="buyTicket">
@@ -246,6 +222,9 @@ export default {
     setup() {
     const route = useRouter();
     const asientos = ref([]);
+    const pelicula = ref({
+        horarioProyeccion: []
+      });
     const selectedSeat = ref(null);
     const dates = ref([
       { day: 'Fri', date: '17' },
@@ -264,6 +243,19 @@ export default {
         if (response.status === 200) {
           asientos.value = response.data.data;
         }
+      } catch (error) {
+        console.error('Error al cargar los datos de los asientos:', error);
+      }
+    };
+
+    const dataPeli = async () => {
+      try {
+        const titulo = sessionStorage.getItem('key');
+        console.log(titulo)
+        const response = await apis.getPeliculaByTittle(titulo); 
+        const result = response.data.data[0]
+        pelicula.value = response.data.data[0] || { horarioProyeccion: [] };  
+        console.log(result)
       } catch (error) {
         console.error('Error al cargar los datos de los asientos:', error);
       }
@@ -292,28 +284,29 @@ export default {
     };
     const buyTicket = () => {
       if (selectedSeat.value) {
-        router.push({path: 'Save', query: selectedSeat.value.name});
+        route.push({path: 'Save', query: selectedSeat.value.name});
       } else {
         alert("Por favor selecciona un asiento primero.");
       }
     };
 
     const goBack = () => {
-      router.back();
+      route.back();
     };
 
     onMounted(() => {
       fetchAsientos();
+      dataPeli();
     });
 
     return {
       dates,
-      prices,
       getSeatClass,
       goBack,
       selectedSeat,
       toggleSeatSelection,
-      buyTicket
+      buyTicket,
+      dataPeli
     };
   }
 };
