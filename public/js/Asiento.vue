@@ -216,29 +216,17 @@
         <div class="precios">
             <div class="precio">
                 <h1>13:00</h1>
-                <p>$ 5.25 3D</p>
-            </div>
-            <div class="precio">
-                <h1>15:45</h1>
-                <p>$ 3.99 3D</p>
-            </div>
-            <div class="precio">
-                <h1>18:50</h1>
-                <p>$ 4.50 3D</p>
-            </div>
-            <div class="precio">
-                <h1>20:30</h1>
-                <p>$ 6.5 3D</p>
+                <p>$ {{ Asiento.precio }} 3D</p>
             </div>
         </div>
     </section>
     <section class="total">
         <div class="price">
             <h1>Price</h1>
-            <p>$24,99</p>
+            <p>${{ selectedPrice }}</p>
         </div>
-        <a href="#">
-            <button>Buy ticket</button>
+        <a href="#" @click="buyTicket">
+            <button :disabled="!selectedPrice">Buy ticket</button>
         </a>
     </section>
 </template>
@@ -268,12 +256,6 @@ export default {
       { day: 'Wed', date: '21' },
       { day: 'Thur', date: '21' },
     ]);
-    const prices = ref([
-      { time: '13:00', amount: '5.25' },
-      { time: '15:45', amount: '3.99' },
-      { time: '18:50', amount: '4.50' },
-      { time: '20:30', amount: '6.50' },
-    ]);
 
     const fetchAsientos = async () => {
       try {
@@ -299,12 +281,20 @@ export default {
       }
     };
     const toggleSeatSelection = (seat) => {
-        console.log(seat)
+        console.log(seat) 
       // Solo cambiar la selección si el asiento no está actualmente seleccionado
       if (selectedSeat.value !== seat) {
         selectedSeat.value = seat;
       } else {
         selectedSeat.value = null; // Deseleccionar si se vuelve a hacer clic
+      }
+      selectedPrice.value = seat === selectedSeat.value ? 0 : foundSeat.precio;
+    };
+    const buyTicket = () => {
+      if (selectedSeat.value) {
+        router.push({path: 'Save', query: selectedSeat.value.name});
+      } else {
+        alert("Por favor selecciona un asiento primero.");
       }
     };
 
@@ -323,6 +313,7 @@ export default {
       goBack,
       selectedSeat,
       toggleSeatSelection,
+      buyTicket
     };
   }
 };

@@ -11,13 +11,25 @@ export const getAllPeliculas = () => api.get("/pelicula/v1?fechayhora=2024-06-20
 export const commingSoonPeliculas = () => api.get("/pelicula/v1?fechayhora=2024-07-10T14:00:00.000Z")
 export const getPeliculaByTittle = (titulo) => api.get(`/pelicula/v2/${encodeURIComponent(titulo)}`);
 export const getAsientos = (idFuncion) => api.get(`/asiento/v1?idFuncion=${encodeURIComponent(idFuncion)}`);
+export const saveBoleta = (idFuncion, nombreAsiento) => {
+    const data = {
+        tipo: "reserva",
+        idFuncion: idFuncion,
+        nombreAsiento: nombreAsiento,
+        fechaActual: new Date().toISOString() 
+    };
+
+    return api.post(`/asiento/v1`, data);
+};
+
 
 const apis = {
     getUsername,
     getAllPeliculas,
     commingSoonPeliculas,
     getPeliculaByTittle,
-    getAsientos
+    getAsientos,
+    saveBoleta
 };
 
 export default apis;
