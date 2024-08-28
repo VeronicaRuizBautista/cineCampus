@@ -83,10 +83,29 @@ main{
     gap: 1.5vw;
 }
 .asientos div{
-    background-color: var(--color-darkslategray-100);
     width: 8vw;
     height: 5vh;
     border-radius: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.asiento-reservado {
+    background-color: var(--color-darkslategray-100);
+  }
+  
+.asiento-no-disponible {
+    background-color: var(--color-lightgray); /* o cualquier color o estilo que desees */
+}
+.asientos div p{
+    display: none;
+}
+.asientos div:hover {
+    background-color: var(--color-red);
+}
+.asientos div:hover p {
+    display: block;
 }
 .b{
     margin-left: 5vw;

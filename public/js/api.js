@@ -10,12 +10,14 @@ export const getUsername = () => api.get('/username');
 export const getAllPeliculas = () => api.get("/pelicula/v1?fechayhora=2024-06-20T14:00:00.000Z")
 export const commingSoonPeliculas = () => api.get("/pelicula/v1?fechayhora=2024-07-10T14:00:00.000Z")
 export const getPeliculaByTittle = (titulo) => api.get(`/pelicula/v2/${encodeURIComponent(titulo)}`);
+export const getAsientos = (idFuncion) => api.get(`/asiento/v1?idFuncion=${encodeURIComponent(idFuncion)}`);
 
 const apis = {
     getUsername,
     getAllPeliculas,
     commingSoonPeliculas,
-    getPeliculaByTittle
+    getPeliculaByTittle,
+    getAsientos
 };
 
 export default apis;

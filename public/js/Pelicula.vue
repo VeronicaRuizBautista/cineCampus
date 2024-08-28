@@ -60,7 +60,7 @@
         </div>
     </div>
     <section class="book-now">
-        <a class="box-rojo" href="#">
+        <a class="box-rojo" href="#" @click="redirectToAsiento(pelicula._id)">
             <button>
                 <h3>Book Now</h3>
             </button> 
@@ -101,6 +101,13 @@ export default {
         console.error('Error al cargar los datos de la película:', error);
       }
     };
+    const redirectToAsiento = async ( idFuncion) => {
+      try {
+        route.push({ name: 'Asiento', query: {idFuncion  } });
+      } catch (error) {
+        console.error('Error al redireccionar a la película', error);
+      }
+    };
 
     onMounted(() => {
       fetchPeliculaData();
@@ -109,6 +116,7 @@ export default {
     return {
       pelicula,
       fetchPeliculaData,
+      redirectToAsiento
     };
   },
 };
