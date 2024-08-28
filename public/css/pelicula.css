@@ -4,6 +4,7 @@
     margin: 0;
     text-decoration: none;
     list-style: none;
+    color: var(--color-white);
 }
 
 body {

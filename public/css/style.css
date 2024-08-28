@@ -190,10 +190,10 @@ body {
   width: 50%;
   /* object-fit: cover; */
 }
-.ejemplo-poster:first-of-type {
+/* .ejemplo-poster:first-of-type { */
   /* background-color: #b83f3f; */
-  margin-left: 450vw;
-}
+  /* margin-left: 450vw;
+} */
 .ejemplo-poster:last-of-type {
   /* background-color: #b83f3f; */
   margin-right: 5vw;

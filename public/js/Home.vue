@@ -88,59 +88,65 @@ import apis from './api.js'
 import { ref, onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
-
-
 export default {
   name: 'Home',
-  data() {
-    return {
-      nombreUsuario: 'Ferrucio Tuccine',
-      peliculas: [],
-      recommendedMovies: [
-        { title: 'Furious 10 (2023)', genre: 'Action, Adventure', imgSrc: 'storage/img/miniatura.png' },
-      ]
-    };
-  },
-  mounted() {
-    this.obtenerNombreUsuario();
-    this.obtenerPeliculas();
-    this.comingSoon();
-  },
-  methods: {
-    
-    async obtenerNombreUsuario() {
+  setup() {
+    const router = useRouter()
+    const nombreUsuario = ref('Ferrucio Tuccine');
+    const peliculas = ref([]);
+    const recommendedMovies = ref([
+      { title: 'Furious 10 (2023)', genre: 'Action, Adventure', imgSrc: 'storage/img/miniatura.png' },
+    ]);
+
+    const obtenerNombreUsuario = async () => {
       try {
         const response = await apis.getUsername();
-        const nombre = response.data
-        this.nombreUsuario = nombre; // Actualizar el nombre del usuario
+        nombreUsuario.value = response.data; // Actualizar el nombre del usuario
       } catch (error) {
-        console.error("Error al obtener el nombre del usuario", error);
+        console.error('Error al obtener el nombre del usuario', error);
       }
-    },
-    async obtenerPeliculas() {
+    };
+
+    const obtenerPeliculas = async () => {
       try {
-        const response =await apis.getAllPeliculas();
-        const peli = response.data.data
-        this.peliculas = peli; // Actualizar el array de películas
+        const response = await apis.getAllPeliculas();
+        peliculas.value = response.data.data; 
       } catch (error) {
-        console.error("Error al obtener las películas", error);
+        console.error('Error al obtener las películas', error);
       }
-    },
-    async comingSoon() {
+    };
+
+    const comingSoon = async () => {
       try {
         const response = await apis.commingSoonPeliculas();
-        const soon = response.data.data
-        this.recommendedMovies = soon; // Actualizar el array de películas
+        recommendedMovies.value = response.data.data; // Actualizar el array de películas
       } catch (error) {
-        console.error("Error al obtener las películas", error);
+        console.error('Error al obtener las películas', error);
       }
-    },
-    async redirectToPelicula(titulo) {
-      // Redireccionar a la página de detalles de la película con el ID en la URL
-      router.push({ name: 'pelicula', params: { titulo } });
-    },
-  }
+    };
+    const redirectToPelicula = async (titulo) => {
+      try {
+        router.push({ name: 'Pelicula', params: { titulo } });
+      } catch (error) {
+        console.error('Error al redireccionar a la película', error);
+      }
+    };
+
+    onMounted(() => {
+      obtenerNombreUsuario();
+      obtenerPeliculas();
+      comingSoon();
+    });
+
+    return {
+      nombreUsuario,
+      peliculas,
+      recommendedMovies,
+      redirectToPelicula
+    };
+  },
 };
+
 </script>
 
 <style scoped>

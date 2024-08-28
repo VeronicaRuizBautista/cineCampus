@@ -1,8 +1,8 @@
 <template>
     <header class="header">
-      <a href="#" class="atras" @click="$router.go(-1)">
+      <router-link to="/" class="atras">
         <i class='bx bx-chevron-left'></i>
-      </a>
+      </router-link>
       <h2 class="cinema-selection">Cinema Selection</h2>
       <a href="#" class="tres-puntos">
         <i class='bx bx-dots-vertical-rounded'></i>
@@ -71,40 +71,47 @@
 <style scoped>
 @import '../css/pelicula.css';
 </style>
+
 <script>
 import apis from './api.js'
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'Pelicula',
-  data() {
-    return {
-      pelicula: {
-        img: '',
-        titulo: '',
-        genero: [],
-        sinopsis: '',
-        reparto: [],
-        horarioProyeccion: [],
-        trailer: ''  // Agrega la URL del tráiler aquí
-      }
-    }
-  },
-  created() {
-    this.fetchPeliculaData();
-  },
-  methods: {
-    async fetchPeliculaData() {
+  setup() {
+    const route = useRouter();
+    const pelicula = ref({
+      img: '',
+      titulo: '',
+      genero: [],
+      sinopsis: '',
+      reparto: [],
+      horarioProyeccion: [],
+      trailer: '',  // Agrega la URL del tráiler aquí
+    });
+
+    const fetchPeliculaData = async () => {
       try {
-        const response = await apis.getPeliculaByTittle();  // Reemplaza con la URL real de tu API
-        const result = await response.json();
-        // Asigna el primer objeto del array de datos al modelo
-        if (result.status === 200 && result.data.length > 0) {
-          this.pelicula = result.data[0];  // Cambia esto si deseas manejar más de una película
-        }
+        const titulo = route.currentRoute.value.params
+        const response = await apis.getPeliculaByTittle(titulo.titulo); 
+        const result = response.data.data[0]
+        pelicula.value = result;  
+
       } catch (error) {
         console.error('Error al cargar los datos de la película:', error);
       }
-    }
-  }
-}
+    };
+
+    onMounted(() => {
+      fetchPeliculaData();
+    });
+
+    return {
+      pelicula,
+      fetchPeliculaData,
+    };
+  },
+};
+
 </script>

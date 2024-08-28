@@ -28,7 +28,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
     MONGO_PORT=49839
     MONGO_PWD="12345678"
     MONGO_HOST="mongodb://"
-    MONGO_CLUSTER="utorack.proxy.rlwy.net"
+    MONGO_CLUSTER="autorack.proxy.rlwy.net"
     MONGO_DB="cinecampus"
 
     EXPRESS_STATIC="public"
