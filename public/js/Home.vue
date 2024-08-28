@@ -19,7 +19,13 @@
             <div class="search-inner">
               <i class='bx bx-search-alt-2' style='color:#fffdfdb7'></i>
             </div>
-            <input class="search-movie-cinema" placeholder="Search movie, cinema, genre..." type="text" />
+            <input 
+              class="search-movie-cinema" 
+              placeholder="Search movie, cinema, genre..." 
+              type="text" 
+              v-model="searchTerm" 
+              @keyup.enter="searchMovies"
+            />
           </div>
         </div>
       </section>
@@ -31,7 +37,7 @@
       </div>
       <section class="movie-posters">
         <div class="search-icon">
-          <div class="ejemplo-poster" v-for="pelicula in peliculas" :key="pelicula._id">
+          <div class="ejemplo-poster" v-for="pelicula in filteredPeliculas" :key="pelicula._id">
             <div class="box-img" @click="redirectToPelicula(pelicula.titulo)">
               <img class="poster1" :src="pelicula.img" alt="" loading="lazy"/>
             </div>
@@ -48,19 +54,19 @@
           <a href="#" class="see-all">See all</a>
         </div>
       </section>
-        <section class="recommended-movies">
-          <div class="cart" v-for="pelicula in recommendedMovies" :key="pelicula._id">
-            <div class="cart-item">
-              <img :alt="pelicula.titulo" :src="pelicula.img" />
-            </div>
-            <div class="recommendation-details">
-              <div class="recommendation-title">
-                <div class="furious-10-2023">{{ pelicula.titulo }}</div>
-                <!-- <div class="action-adventure">{{ pelicula.genero.join(', ') }}</div> -->
-              </div>
+      <section class="recommended-movies">
+        <div class="cart" v-for="pelicula in filteredRecommendedMovies" :key="pelicula._id">
+          <div class="cart-item">
+            <img :alt="pelicula.titulo" :src="pelicula.img" />
+          </div>
+          <div class="recommendation-details">
+            <div class="recommendation-title">
+              <div class="furious-10-2023">{{ pelicula.titulo }}</div>
+               <!-- <div class="action-adventure">{{ pelicula.genero.join(', ') }}</div> -->
             </div>
           </div>
-        </section>
+        </div>
+      </section>
       </section>
       <footer class="rectangle-parent">
           <div class="tabs-content-parent">
@@ -85,7 +91,7 @@
 
 <script>
 import apis from './api.js'
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
@@ -94,6 +100,7 @@ export default {
     const router = useRouter()
     const nombreUsuario = ref('Ferrucio Tuccine');
     const peliculas = ref([]);
+    const searchTerm = ref('');
     const recommendedMovies = ref([
       { title: 'Furious 10 (2023)', genre: 'Action, Adventure', imgSrc: 'storage/img/miniatura.png' },
     ]);
@@ -132,6 +139,27 @@ export default {
       }
     };
 
+        // Función para realizar la búsqueda cuando se presiona "Enter"
+        const searchMovies = () => {
+      // Los resultados se actualizan automáticamente porque usamos `computed`
+      // para filtrar las películas y las películas recomendadas
+    };
+     // Computed properties para filtrar las películas
+    const filteredPeliculas = computed(() => {
+      const term = searchTerm.value.toLowerCase();
+      return peliculas.value.filter(pelicula =>
+        term === '' || pelicula.titulo.toLowerCase().includes(term) ||
+        pelicula.genero.some(g => g.toLowerCase().includes(term))
+      );
+    });
+
+    const filteredRecommendedMovies = computed(() => {
+      const term = searchTerm.value.toLowerCase();
+      return recommendedMovies.value.filter(pelicula =>
+        term === '' || pelicula.titulo.toLowerCase().includes(term)
+      );
+    });
+
     onMounted(() => {
       obtenerNombreUsuario();
       obtenerPeliculas();
@@ -142,7 +170,11 @@ export default {
       nombreUsuario,
       peliculas,
       recommendedMovies,
-      redirectToPelicula
+      redirectToPelicula,
+      searchTerm,
+      filteredPeliculas,
+      filteredRecommendedMovies,
+      searchMovies
     };
   },
 };

@@ -20,25 +20,19 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
-  name: 'Pelicula',
+  name: 'Trailer',
   setup() {
     const route = useRouter();
-    const pelicula = ref({
-      img: '',
-      titulo: '',
-      genero: [],
-      sinopsis: '',
-      reparto: [],
-      horarioProyeccion: [],
+    const trailer = ref({
       trailer: '',  
     });
 
-    const fetchPeliculaData = async () => {
+    const fetchtrailerData = async () => {
       try {
         const titulo = route.currentRoute.value.params
         const response = await apis.getPeliculaByTittle(titulo.titulo); 
         const result = response.data.data[0]
-        pelicula.value = result;  
+        trailer.value = result;  
 
       } catch (error) {
         console.error('Error al cargar los datos de la película:', error);
@@ -46,12 +40,12 @@ export default {
     };
 
     onMounted(() => {
-      fetchPeliculaData();
+      fetchtrailerData();
     });
 
     return {
-      pelicula,
-      fetchPeliculaData,
+      trailer,
+      fetchtrailerData,
     };
   },
 };
