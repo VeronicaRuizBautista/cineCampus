@@ -41,7 +41,7 @@
                 </div>
                 <div class="box2">
                   <h3> Cinema A</h3>
-                  <h3>{{ selectedSeatsStorage }}</h3>
+                  <h3>{{ selectedSeatsStr }}</h3>
                 </div>
             </div>
             <div class="date">
@@ -50,14 +50,14 @@
                   <p>Order ID</p>
                 </div>
                 <div class="box2">
-                  <h3>{{ selectedPriceStorage }}</h3>
+                  <h3>{{ selectedTotalPriceStorage }}</h3>
                   <h3> 12345678</h3>
                 </div>
             </div>
             <div class="linea">
                 <img src="../storage/img/Line61.png" alt="">
             </div>
-            <img src="../storage/img/barcode.png" alt="">
+            <img src="../storage/img/Barcode.png" alt="">
         </div>
     </main>
 </template>
@@ -78,7 +78,9 @@ export default {
     let selectedDayStorage = sessionStorage.getItem('selectedDayStorage');
     let selectedHourStorage = sessionStorage.getItem('selectedHourStorage');
     let selectedSeatsStorage = sessionStorage.getItem('selectedSeatsStorage');
-    let selectedPriceStorage = sessionStorage.getItem('selectedPriceStorage');
+    const selectedSeatsArray = JSON.parse(selectedSeatsStorage);
+    const selectedSeatsStr = selectedSeatsArray.join(', ');
+    let selectedTotalPriceStorage = sessionStorage.getItem('selectedTotalPriceStorage');
     const pelicula = ref({
       img: '',
       titulo: '',
@@ -113,8 +115,9 @@ export default {
       selectedHourStorage,
       selectedDayStorage,
       selectedSeatsStorage,
-      selectedPriceStorage,
-      goHome
+      goHome,
+      selectedSeatsStr,
+      selectedTotalPriceStorage
     };
   },
 };

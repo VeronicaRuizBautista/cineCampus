@@ -5,6 +5,7 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
+    "start": "npm run dev && npm run vite",
     "vite": "vite",
     "env": "node --watch --env-file .env server/main.js",
     "dev": "node --watch --env-file .env server/app.js"

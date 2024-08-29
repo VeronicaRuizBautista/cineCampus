@@ -71,6 +71,7 @@ body {
     /* background-color: gainsboro; */
     width: 100%;
     justify-content:space-evenly;
+    align-items: center;
     gap: var(--gap-xl);
 }
 
@@ -81,6 +82,8 @@ body {
     justify-content: flex-start;
 }
 .titulo {
+    padding: 0;
+    /* background-color: rebeccapurple; */
     font-size: 4.3vw;
     font-family: "Inter";
 }

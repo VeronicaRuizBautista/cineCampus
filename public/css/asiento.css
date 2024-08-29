@@ -101,13 +101,15 @@ main{
 .asientos p {
     display: none;
   }
-  .asiento-seleccionado {
-    background-color: var(--color-red); 
-  }
-  
+
   .asiento-seleccionado p {
     display: block;
-  }
+}
+.asiento-seleccionado {
+    background-color: var(--color-red); 
+}
+  
+
   
 
 .b{

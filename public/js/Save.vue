@@ -31,11 +31,11 @@
             <div class="order-summary">
                 <div class="order-row">
                 <span class="left">1 Ticket</span>
-                <span class="right">{{ selectedSeatsStorage }}</span>
+                <span class="right">{{ selectedSeatsStr }}</span>
                 </div>
                 <div class="order-row">
                 <span class="left">Regular Seat</span>
-                <span class="right">{{ selectedPriceStorage }}</span>
+                <span class="right">{{ selectedTotalPriceStorage }}</span>
                 </div>
                 <div class="order-row">
                 <span class="left">Service Fee</span>
@@ -63,7 +63,7 @@
         </div>
 
         <footer>
-            <button class="buyticket" @click="seatReservation()">Buy Ticket</button>
+            <button class="buyticket" @click="processReservations()">Buy Ticket</button>
         </footer>
     </div>
 </template>
@@ -83,7 +83,9 @@ export default {
     let selectedDayStorage = sessionStorage.getItem('selectedDayStorage');
     let selectedHourStorage = sessionStorage.getItem('selectedHourStorage');
     let selectedSeatsStorage = sessionStorage.getItem('selectedSeatsStorage');
-    let selectedPriceStorage = sessionStorage.getItem('selectedPriceStorage');
+    const selectedSeatsArray = JSON.parse(selectedSeatsStorage);
+    const selectedSeatsStr = selectedSeatsArray.join(', ');
+    let selectedTotalPriceStorage = sessionStorage.getItem('selectedTotalPriceStorage');
     let idFuncion = sessionStorage.getItem('idFuncion');
     const route = useRouter();
     const pelicula = ref({
@@ -105,10 +107,23 @@ export default {
         console.error('Error al cargar los datos de los asientos:', error);
       }
     };
-    const seatReservation= async () => {
+    const processReservations = async () => {
+    try {
+      // Asegúrate de que selectedSeatsStorage sea un array
+      const selectedSeatsArray = JSON.parse(selectedSeatsStorage);
+
+      // Itera sobre cada asiento seleccionado
+      for (const seat of selectedSeatsArray) {
+        await seatReservation(idFuncion, seat);
+      }
+    } catch (error) {
+      console.error('Error al procesar reservas', error);
+    }
+  };
+    const seatReservation= async (idFuncion, nombreAsiento) => {
       try {
         console.log( idFuncion)
-        const response = await apis.saveBoleta(idFuncion, selectedSeatsStorage)
+        const response = await apis.saveBoleta(parseInt(idFuncion) , nombreAsiento)
         .then(response => {
             console.log('Boleta guardada exitosamente:', response.data);
             route.push({name: 'Ticket'});
@@ -135,10 +150,12 @@ export default {
       selectedHourStorage,
       selectedDayStorage,
       selectedSeatsStorage,
-      selectedPriceStorage,
       dataPeli,
       idFuncion,
-      goBack
+      goBack,
+      selectedSeatsStr,
+      processReservations,
+      selectedTotalPriceStorage
     };
   },
 };
