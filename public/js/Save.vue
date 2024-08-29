@@ -1,7 +1,7 @@
 <template>
     <div class="bodyorder" v-if="pelicula">
         <header>
-            <div class="ordermainheader">
+            <div class="box1">
               <a href="#" @click="goBack"><i class='bx bx-chevron-left'></i></a>
                 <h3 class="whitetext">Order Summary</h3>
                 <i class='bx bx-dots-vertical-rounded'></i>
@@ -13,7 +13,7 @@
                 <div class="moviesummarytext">
                     <div class="moviesummaryinformation">
                         <strong class="redtext">{{ pelicula.titulo }}</strong>
-                        <p class="graytext">{{ pelicula.genero }}</p>
+                        <p class="graytext">{{ pelicula.genero.join(', ') }}</p>
                     </div>
                     <div class="moviesummarylocation">
                         <strong class="whitetext">HARTONO MALL</strong>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="order-row">
                 <span class="left">Regular Seat</span>
-                <span class="right">$24,99</span>
+                <span class="right">{{ selectedPriceStorage }}</span>
                 </div>
                 <div class="order-row">
                 <span class="left">Service Fee</span>
@@ -46,11 +46,12 @@
             <h3 class="whitetext">Payment Method</h3>
 
             <div class="payment-method">
-                <img src="../storage/img/Vector 259.png" alt="" class="card-logo">
+                <img src="../storage/img/Mastercard.png" alt="" class="card-logo">
                 <div class="card-details">
                     <span class="card-name">MasterCard</span>
                     <span class="card-number">**** **** 0998 7865</span>
                 </div>
+                <img src="../storage/img/circulo.png" alt="">
             </div>
 
             <div class="paymentTime">
@@ -60,7 +61,7 @@
         </div>
 
         <footer>
-            <button class="buyticket" @click="gotoTicket()">Buy Ticket</button>
+            <button class="buyticket" @click="seatReservation()">Buy Ticket</button>
         </footer>
     </div>
 </template>
@@ -77,6 +78,11 @@ import { useRouter } from 'vue-router';
 export default {
   name: 'Save',
   setup() {
+    let selectedDayStorage = sessionStorage.getItem('selectedDayStorage');
+    let selectedHourStorage = sessionStorage.getItem('selectedHourStorage');
+    let selectedSeatsStorage = sessionStorage.getItem('selectedSeatsStorage');
+    let selectedPriceStorage = sessionStorage.getItem('selectedPriceStorage');
+    let idFuncion = sessionStorage.getItem('idFuncion');
     const route = useRouter();
     const pelicula = ref({
       img: '',
@@ -86,6 +92,7 @@ export default {
       reparto: [],
       horarioProyeccion: [],
     });
+
     const dataPeli = async () => {
       try {
         const titulo = sessionStorage.getItem('key');
@@ -98,8 +105,8 @@ export default {
     };
     const seatReservation= async () => {
       try {
-        // const titulo = route.currentRoute.value.params
-        const response = await apis.saveBoleta(idFuncion, nombreAsiento)
+        console.log( idFuncion)
+        const response = await apis.saveBoleta(idFuncion, selectedSeatsStorage)
         .then(response => {
             // Maneja la respuesta de la API si es necesario
             console.log('Boleta guardada exitosamente:', response.data);
@@ -107,21 +114,29 @@ export default {
         .catch(error => {
             console.error('Error al guardar la boleta:', error);
         });
-        // const result = response.data.data[0]
-        // trailer.value = result;  
 
       } catch (error) {
         console.error('Error al comprar boleta', error);
       }
     };
+    const goBack = () => {
+      route.back();
+    };
 
     onMounted(() => {
-        seatReservation();
+        dataPeli()
     });
 
     return {
-    //   trailer,
+      pelicula,
       seatReservation,
+      selectedHourStorage,
+      selectedDayStorage,
+      selectedSeatsStorage,
+      selectedPriceStorage,
+      dataPeli,
+      idFuncion,
+      goBack
     };
   },
 };

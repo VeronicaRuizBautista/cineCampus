@@ -103,6 +103,8 @@ export default {
       }
     };
     const redirectToAsiento = async ( idFuncion) => {
+      console.log(idFuncion)
+      sessionStorage.setItem('idFuncion', idFuncion);
       try {
         route.push({ name: 'Asiento', query: {idFuncion  } });
       } catch (error) {

@@ -195,7 +195,16 @@ main{
     background-color: var(--color-red);
 }
 .seleccionado{
+    padding-left: 3vw;
+    padding-right: 3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    border-radius: 3vw;
     background-color: var(--color-red);
+    color: var(--color-white);
 }
 
 .detalles{
@@ -215,7 +224,7 @@ main{
     overflow-x: auto;
     gap: 5vw;
 }
-.fecha {
+.no-seleccionado {
     padding-left: 3vw;
     padding-right: 3vw;
     display: flex;
@@ -230,11 +239,13 @@ main{
     background-color: var(--color-red);
     color: var(--color-white);
 } */
-.detalles p{
+.no-seleccionado p,
+.no-seleccionadoHora p{
     width: 100%;
     color: var(--color-darkgray-100);
 }
-.detalles h1{
+.no-seleccionado h1,
+.no-seleccionadoHora h1{
     width: 100%;
     color: var(--color-darkslategray-100);
 }
@@ -248,7 +259,7 @@ main{
     overflow-x: auto;
     gap: 5vw;
 }
-.precio {
+.no-seleccionadoHora {
     padding-left: 1vw;
     padding-right: 1vw;
     display: flex;
@@ -259,7 +270,21 @@ main{
     background-color: var(--color-whitesmoke);
     border-radius: 3vw;
 }
-
+.seleccionadoHora{
+    color: var(--color-white);
+    padding-left: 1vw;
+    padding-right: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    background-color: var(--color-red);
+    border-radius: 3vw;
+}
+.selected {
+    background-color: var(--color-red);
+  }
 .total {
     height: 10vh;
     width: 100%;

@@ -181,16 +181,20 @@
             <p>Selected</p>
         </div>
     </div>
-</main>
+    </main>
       <section class="detalles" v-if="pelicula.horarioProyeccion">
         <div class="fechas">
-          <div class="fecha" v-for="(horario, index) in pelicula.horarioProyeccion" :key="index">
+          <div :class="getSeatFecha(new Date(horario.fechaInicio).toLocaleDateString('en-US', {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'}))" id="fecha" v-for="(horario, index) in pelicula.horarioProyeccion"
+           :key="index"  
+           @click="toggleFechaSelection(new Date(horario.fechaInicio).toLocaleDateString('en-US', {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'}))">
             <p>{{ new Date(horario.fechaInicio).toLocaleDateString('en-US', { weekday: 'short' }) }}</p>
             <h1>{{ new Date(horario.fechaInicio).getDate() }}</h1>
           </div>
         </div>
         <div class="precios">
-          <div class="precio" v-for="(horario, index) in pelicula.horarioProyeccion" :key="index">
+          <div id="precio" v-for="(horario, index) in pelicula.horarioProyeccion" 
+          :key="index" :class="getSeatHora(new Date(horario.fechaInicio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }))"
+          @click="togglehoraSelection(new Date(horario.fechaInicio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }))">
             <h1>{{ new Date(horario.fechaInicio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</h1>
             <p>$ {{ selectedPrice}} 3D</p>
           </div>
@@ -222,7 +226,9 @@ export default {
     setup() {
     const route = useRouter();
     const asientos = ref([]);
-    const selectedPrice = ref(null);
+    const selectedPrice = ref(0);
+    const selectedDate = ref(null);
+    const selectedTime = ref(null);
     const pelicula = ref({
         horarioProyeccion: []
       });
@@ -273,6 +279,21 @@ export default {
         return 'asiento-no-disponible';
       }
     };
+    const getSeatFecha = (fecha) => {
+      if (fecha === selectedDate.value) {
+            return 'seleccionado';
+      }else {
+        return 'no-seleccionado'
+      }
+    };
+    const getSeatHora = (hora) => {
+      if (hora === selectedTime.value) {
+            return 'seleccionadoHora';
+      }else {
+        return 'no-seleccionadoHora'
+      }
+    };
+
     const toggleSeatSelection = (seat) => {
       console.log(seat);
 
@@ -289,17 +310,38 @@ export default {
       } else {
         selectedSeat.value = null; // Deseleccionar si se vuelve a hacer clic
       }
+      sessionStorage.setItem('selectedSeatsStorage', selectedSeat.value); 
 
       // Actualizar el precio basado en la selección actual
       const foundSeat = asientos.value.find(a => a.asiento === seat);
       selectedPrice.value = selectedSeat.value ? foundSeat.precio : 0;
+      sessionStorage.setItem('selectedPriceStorage', selectedPrice.value); 
     };
-    const buyTicket = () => {
-      if (selectedSeat.value) {
-        route.push({path: 'Save', query: selectedSeat.value});
+    const toggleFechaSelection = (fecha) => {
+      console.log(fecha);
+      sessionStorage.setItem('selectedDayStorage', fecha);     
+      if (selectedDate.value !== fecha) {
+        selectedDate.value = fecha;
       } else {
-        alert("Por favor selecciona un asiento primero.");
+        selectedDate.value = null; // Deseleccionar si se vuelve a hacer clic
       }
+    };
+    const togglehoraSelection = (hora) => {
+      console.log(hora);
+      sessionStorage.setItem('selectedHourStorage', hora);
+      if (selectedTime .value !== hora) {
+        selectedTime .value = hora;
+      } else {
+        selectedTime .value = null; // Deseleccionar si se vuelve a hacer clic
+      }
+    };
+
+    const buyTicket = () => {
+        if (selectedSeat.value && selectedDate.value && selectedTime.value) {
+            route.push({name: 'Save', query: selectedSeat.value});
+        } else {
+            alert("Por favor selecciona un asiento, fecha y hora de los que se encuentran disponibles");
+        }
     };
 
     const goBack = () => {
@@ -322,7 +364,13 @@ export default {
       selectedSeat,
       toggleSeatSelection,
       buyTicket,
-      dataPeli
+      dataPeli,
+      selectedDate,
+      selectedTime,
+      toggleFechaSelection,
+      togglehoraSelection,
+      getSeatFecha,
+      getSeatHora
     };
   }
 };

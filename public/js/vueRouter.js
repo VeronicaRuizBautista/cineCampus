@@ -9,7 +9,7 @@ const routes = [
   { path: '/', name: 'Home', component: Home },
   { path: '/pelicula/v2/:titulo', name: 'Pelicula', component: Pelicula, props: true },
   { path: '/asiento/v1', name: 'Asiento', component: Asiento, props: true },
-  { path: '/asiento/v1', name: 'Save', component: Save, props: true },
+  { path: '/asiento/v2', name: 'Save', component: Save, props: (route) => ({ idFuncion: route.query.idFuncion, nombreAsiento: route.query.nombreAsiento }) },
   // { path: '/pelicula/v2/:titulo', name: 'Trailer', component: Trailer, props: true },
 ];
 
