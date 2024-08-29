@@ -19,7 +19,7 @@ export const saveBoleta = (idFuncion, nombreAsiento) => {
         fechaActual: new Date().toISOString() 
     };
 
-    return api.post(`/asiento/v1`, data);
+    return api.post(`/asiento/v2`, data);
 };
 
 

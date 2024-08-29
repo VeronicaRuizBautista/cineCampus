@@ -245,7 +245,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
         //usar con thunder
         //POST
-        `http://localhost:5012/asiento/v1`
+        `http://localhost:5012/asiento/v2`
 
         //Body
         {

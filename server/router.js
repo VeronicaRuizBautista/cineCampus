@@ -36,7 +36,7 @@ const {cancelarAsiento} = require('./controllers/asientoController');
 const {candelarAsientoValidationRules} = require('./validators/asientoValidator');
 
 router.get('/asiento/v1', AsientoValidationByFuncion(), asientoDisponibilidad)
-router.post('/asiento/v1', asientoValidationRules(), compraAsiento)
+router.post('/asiento/v2', asientoValidationRules(), compraAsiento)
 router.delete('/asiento/v1', candelarAsientoValidationRules(), cancelarAsiento)
 
 const {validarTarjeta} = require('./controllers/tarjetaController');
