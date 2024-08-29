@@ -226,10 +226,10 @@ main{
     background-color: var(--color-whitesmoke);
     border-radius: 3vw;
 }
-.fecha:first-of-type {
+/* .fecha:first-of-type {
     background-color: var(--color-red);
     color: var(--color-white);
-}
+} */
 .detalles p{
     width: 100%;
     color: var(--color-darkgray-100);
