@@ -1,8 +1,8 @@
 <template>
     <header class="header">
-      <router-link to="/" class="atras">
+      <a href="#"  @click="goBack" class="atras">
         <i class='bx bx-chevron-left'></i>
-      </router-link>
+      </a>
       <h2 class="cinema-selection">Cinema Selection</h2>
       <a href="#" class="tres-puntos">
         <i class='bx bx-dots-vertical-rounded'></i>
@@ -14,7 +14,9 @@
       <div class="box-principal">
         <div class="box-principal2">
           <h2 class="titulo">{{ pelicula.titulo }}</h2>
-          <p class="genero">{{ pelicula.genero.join(', ') }}</p>
+          <p v-if="pelicula && Array.isArray(pelicula.genero)" class="genero">
+            {{ pelicula.genero.join(', ') }}
+          </p>
         </div>
         <a :href="pelicula.trailer">
           <button class="watch-trailer">
@@ -111,7 +113,9 @@ export default {
         console.error('Error al redireccionar a la película', error);
       }
     };
-
+    const goBack = () => {
+      route.back();
+    };
     onMounted(() => {
       fetchPeliculaData();
     });
@@ -119,7 +123,8 @@ export default {
     return {
       pelicula,
       fetchPeliculaData,
-      redirectToAsiento
+      redirectToAsiento,
+      goBack
     };
   },
 };

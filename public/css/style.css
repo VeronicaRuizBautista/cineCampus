@@ -218,7 +218,11 @@ body {
 .titulo-poster {
   padding-top: 2vh;
   margin: 0;
+  width: 80%;
   font-size: 4.5vw;
+  overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   /* background-color: rebeccapurple; */
 }
 .genero-poster{
@@ -306,6 +310,9 @@ body {
 .recommendation-details,
 .recommendation-title {
   width: 50vw;
+  overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   /* background: honeydew; */
   display: flex;
   flex-direction: column;

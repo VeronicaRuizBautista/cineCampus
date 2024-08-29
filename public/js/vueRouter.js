@@ -3,6 +3,7 @@ import Home from './Home.vue';
 import Pelicula from './Pelicula.vue';
 import Asiento from './Asiento.vue';
 import Save from './Save.vue';
+import Ticket from './Ticket.vue';
 // import Trailer from './Trailer.vue';
 
 const routes = [
@@ -10,6 +11,7 @@ const routes = [
   { path: '/pelicula/v2/:titulo', name: 'Pelicula', component: Pelicula, props: true },
   { path: '/asiento/v1', name: 'Asiento', component: Asiento, props: true },
   { path: '/asiento/v2', name: 'Save', component: Save, props: (route) => ({ idFuncion: route.query.idFuncion, nombreAsiento: route.query.nombreAsiento }) },
+  { path: '/ticket/v1', name: 'Ticket', component: Ticket, props: true },
   // { path: '/pelicula/v2/:titulo', name: 'Trailer', component: Trailer, props: true },
 ];
 

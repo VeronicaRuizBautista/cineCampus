@@ -43,7 +43,9 @@
             </div>
             <div class="detalles-movie">
               <h2 class="titulo-poster">{{ pelicula.titulo }}</h2>
-              <!-- <h1 class="genero-poster">{{ pelicula.genero.join(', ') }}</h1> -->
+              <h1 v-if="pelicula && Array.isArray(pelicula.genero)" class="genero-poster">
+                {{ pelicula.genero.join(', ') }}
+              </h1>
             </div>
           </div> 
         </div>
@@ -62,7 +64,9 @@
           <div class="recommendation-details">
             <div class="recommendation-title">
               <div class="furious-10-2023">{{ pelicula.titulo }}</div>
-               <!-- <div class="action-adventure">{{ pelicula.genero.join(', ') }}</div> -->
+              <div v-if="pelicula && Array.isArray(pelicula.genero)" class="action-adventure">
+                {{ pelicula.genero.join(', ') }}
+              </div>
             </div>
           </div>
         </div>
@@ -80,7 +84,7 @@
           </div>
           <div class="navigation-labels">
               <div class="home1">Home</div>
-              <div class="browse">Browse</div>
+              <div class="browse" @click="focusSearch">Browse</div>
               <div class="tickets">Tickets</div>
               <div class="profile">Profile</div>
           </div>
@@ -144,6 +148,13 @@ export default {
       // Los resultados se actualizan automáticamente porque usamos `computed`
       // para filtrar las películas y las películas recomendadas
     };
+    const focusSearch = () => {
+      // Enfocar el campo de búsqueda
+      const input = document.querySelector('.search-movie-cinema');
+      if (input) {
+        input.focus();
+      }
+    };
      // Computed properties para filtrar las películas
     const filteredPeliculas = computed(() => {
       const term = searchTerm.value.toLowerCase();
@@ -174,7 +185,8 @@ export default {
       searchTerm,
       filteredPeliculas,
       filteredRecommendedMovies,
-      searchMovies
+      searchMovies,
+      focusSearch
     };
   },
 };

@@ -13,7 +13,9 @@
                 <div class="moviesummarytext">
                     <div class="moviesummaryinformation">
                         <strong class="redtext">{{ pelicula.titulo }}</strong>
-                        <p class="graytext">{{ pelicula.genero.join(', ') }}</p>
+                        <p v-if="pelicula && Array.isArray(pelicula.genero)" class="graytext">
+                          {{ pelicula.genero.join(', ') }}
+                        </p>
                     </div>
                     <div class="moviesummarylocation">
                         <strong class="whitetext">HARTONO MALL</strong>
@@ -108,8 +110,8 @@ export default {
         console.log( idFuncion)
         const response = await apis.saveBoleta(idFuncion, selectedSeatsStorage)
         .then(response => {
-            // Maneja la respuesta de la API si es necesario
             console.log('Boleta guardada exitosamente:', response.data);
+            route.push({name: 'Ticket'});
         })
         .catch(error => {
             console.error('Error al guardar la boleta:', error);
