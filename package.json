@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "start": "npm run dev && npm run vite",
+    "start": "concurrently \"npm run dev\" \"npm run vite\"",
     "vite": "vite",
     "env": "node --watch --env-file .env server/main.js",
     "dev": "node --watch --env-file .env server/app.js"
@@ -18,11 +18,13 @@
     "express": "^4.19.2",
     "express-validator": "^7.2.0",
     "mongodb": "^6.8.0",
+    "swiper": "^11.1.11",
     "vue": "^3.4.38",
     "vue-router": "^4.4.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
+    "concurrently": "^8.2.2",
     "vite": "^5.4.2"
   }
 }

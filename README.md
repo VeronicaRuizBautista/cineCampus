@@ -7,39 +7,74 @@ CineCampus es una empresa de entretenimiento que se especializa en ofrecer una e
 
 Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando MongoDB como base de datos. Las APIs deberán gestionar la selección de películas, la compra de boletos, la asignación de asientos, y la implementación de descuentos para tarjetas VIP, con soporte para diferentes roles de usuario.
 
-**Cadena de Coneccion**
-```json
-    MONGO_USER="anaT"
-    MONGO_PORT=27017
-    MONGO_PWD="12345678"
-    MONGO_HOST="mongodb://"
-    MONGO_CLUSTER="172.16.102.13"
-    MONGO_DB="cinecampus"
 
-    EXPRESS_STATIC="public"
-    EXPRESS_PORT=5012
-    EXPRESS_HOST="localhost"
+# Cómo Usar Este Proyecto
 
-    `mongodb://anaT:12345678@172.16.102.13:27017/cinecampus`
+Para poder utilizar este proyecto, sigue los siguientes pasos:
 
+1. **Configurar el archivo `.env`**:
+   Antes de ejecutar el proyecto, es necesario que configures el archivo `.env` con los siguientes datos:
 
-        //con railway
-    MONGO_USER="anaT"
-    MONGO_PORT=49839
-    MONGO_PWD="12345678"
-    MONGO_HOST="mongodb://"
-    MONGO_CLUSTER="autorack.proxy.rlwy.net"
-    MONGO_DB="cinecampus"
-
-    EXPRESS_STATIC="public"
-    EXPRESS_PORT=5012
-    EXPRESS_HOST="localhost"
+   ```plaintext
+   MONGO_USER="anaT"
+   MONGO_PORT=27017
+   MONGO_PWD="12345678"
+   MONGO_HOST="mongodb://"
+   MONGO_CLUSTER="172.16.102.13"
+   MONGO_DB="cinecampus"
+   
+   EXPRESS_STATIC="public"
+   EXPRESS_PORT=5012
+   EXPRESS_HOST="localhost"
 
 
-    'mongodb://mongo:FhMsVSTWFqHHktcYhQhaErcJTYPWcCbL@autorack.proxy.rlwy.net:49839'
-```
+   `mongodb://anaT:12345678@172.16.102.13:27017/cinecampus`
+   
+   //con railway
+   MONGO_USER="anaT"
+   MONGO_PORT=49839
+   MONGO_PWD="12345678"
+   MONGO_HOST="mongodb://"
+   MONGO_CLUSTER="autorack.proxy.rlwy.net"
+   MONGO_DB="cinecampus"
+   
+   EXPRESS_STATIC="public"
+   EXPRESS_PORT=5012
+   EXPRESS_HOST="localhost"
 
-### **Requisitos Funcionales**
+
+   'mongodb://mongo:FhMsVSTWFqHHktcYhQhaErcJTYPWcCbL@autorack.proxy.rlwy.net:49839'
+   ```
+
+
+2. **Instalar dependencias**: 
+   Una vez configurado el archivo `.env`, instala todas las dependencias requeridas ejecutando el siguiente comando en la terminal:
+
+   ```bash
+   npm i
+   ```
+
+   Este comando instalará todas las dependencias listadas en el archivo `package.json`.
+
+3. **Ejecutar el proyecto**:
+   Después de instalar las dependencias, inicia el proyecto con el siguiente comando:
+
+   ```bash
+   npm run start
+   ```
+
+   Esto ejecutará el servidor y el entorno de desarrollo, iniciando el programa.
+
+4. **Acceder a la aplicación**:
+   Una vez que el programa esté en ejecución, dirígete al enlace proporcionado por Vite en la terminal para visualizar la aplicación en tu navegador. Normalmente, este enlace será algo similar a:
+
+   ```
+  http://localhost:5173/
+   ```
+
+
+
+### **Documentacion de las api**
 
 1. **Selección de Películas:**
    - **API para Listar Películas:** 

@@ -225,7 +225,7 @@
             <h1>Price</h1>
             <p>${{ selectedTotalPrice }}</p>
         </div>
-        <a href="#" @click="buyTicket">
+        <a href="#" @click="buyTicket()">
             <button :disabled="!selectedPrice">Buy ticket</button>
         </a>
     </section>
@@ -329,13 +329,12 @@ export default {
       const foundSeat = asientos.value.find(a => a.asiento === seat);
       // Solo cambiar la selección si el asiento no está actualmente seleccionado
       if (selectedSeats.value.includes(seat)) {
-        selectedSeat.value = seat;
       // Si el asiento ya está seleccionado, se deselecciona
       selectedSeats.value = selectedSeats.value.filter(s => s !== seat);
       selectedTotalPrice.value -= foundSeat.precio;
     } else {
           // Actualizar el precio basado en la selección actual
-
+          selectedSeat.value = seat;
         selectedSeats.value.push(seat);
         selectedTotalPrice.value += foundSeat.precio;
 
