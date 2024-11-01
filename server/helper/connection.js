@@ -4,7 +4,7 @@ module.exports = class connect {
     user;
     port;
     #pass;
-    #host;
+    host;
     #cluster;
     #dbName;
     conexion;
@@ -20,7 +20,7 @@ module.exports = class connect {
         this.user = u;
         this.port = p;
         this.setPass = w;
-        this.setHost = h; // Aquí `mongodb://` se quitará del URI
+        this.host = h;
         this.setCluster = c;
         this.setdbName = d;
         this.#open().then(() => {
@@ -32,9 +32,6 @@ module.exports = class connect {
         this.#pass = pass;
     }
 
-    set setHost(host) {
-        this.#host = host;
-    }
 
     set setCluster(cluster) {
         this.#cluster = cluster;
@@ -48,10 +45,6 @@ module.exports = class connect {
         return this.#pass;
     }
 
-    get getHost() {
-        return this.#host;
-    }
-
     get getCluster() {
         return this.#cluster;
     }
@@ -62,7 +55,7 @@ module.exports = class connect {
 
     async #open() {
         // Construir el URI correctamente con usuario y contraseña
-        const uri = `mongodb://${this.user}:${this.getPass}@${this.getCluster}:${this.port}/${this.getdbName}`;
+        const uri = `${this.host}${this.user}:${this.getPass}@${this.getCluster}/${this.getdbName}`;
         this.conexion = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
         await this.conexion.connect();
         this.db = this.conexion.db(this.getdbName);

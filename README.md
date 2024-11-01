@@ -16,34 +16,18 @@ Para poder utilizar este proyecto, sigue los siguientes pasos:
    Antes de ejecutar el proyecto, es necesario que configures el archivo `.env` con los siguientes datos:
 
    ```plaintext
-   MONGO_USER="anaT"
-   MONGO_PORT=27017
-   MONGO_PWD="12345678"
-   MONGO_HOST="mongodb://"
-   MONGO_CLUSTER="172.16.102.13"
-   MONGO_DB="cinecampus"
-   
-   EXPRESS_STATIC="public"
-   EXPRESS_PORT=5012
-   EXPRESS_HOST="localhost"
+      MONGO_USER
+      MONGO_PWD
+      MONGO_HOST
+      MONGO_CLUSTER
+      MONGO_DB
+      EXPRESS_STATIC
+      EXPRESS_PORT
+      EXPRESS_HOST
 
-
-   `mongodb://anaT:12345678@172.16.102.13:27017/cinecampus`
-   
-   //con railway
-   MONGO_USER="anaT"
-   MONGO_PORT=49839
-   MONGO_PWD="12345678"
-   MONGO_HOST="mongodb://"
-   MONGO_CLUSTER="autorack.proxy.rlwy.net"
-   MONGO_DB="cinecampus"
-   
-   EXPRESS_STATIC="public"
-   EXPRESS_PORT=5012
-   EXPRESS_HOST="localhost"
-
-
-   'mongodb://mongo:FhMsVSTWFqHHktcYhQhaErcJTYPWcCbL@autorack.proxy.rlwy.net:49839'
+      EXPRESS_STATIC
+      EXPRESS_PORT
+      EXPRESS_HOST
    ```
 
 
